@@ -9,14 +9,14 @@ import javax.persistence.ManyToOne;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-public class Destinations {
+public class Destination {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	@ManyToOne
 	@JsonIgnore
-	private int cityID;
+	private City city;
 	private int priceRange; 
 	private int rating;
 	private int phoneNumber;
@@ -29,11 +29,11 @@ public class Destinations {
 	private String destinationType;
 	
 	
-	public Destinations(int id, int cityID, int priceRange, int rating, int phoneNumber, String address, String name,
+	public Destination(int id, City city, int priceRange, int rating, int phoneNumber, String address, String name,
 			String timings, String websiteLink, double latitude, double longitude, String destinationType) {
 		super();
 		this.id = id;
-		this.cityID = cityID;
+		this.city = city;
 		this.priceRange = priceRange;
 		this.rating = rating;
 		this.phoneNumber = phoneNumber;
@@ -46,6 +46,9 @@ public class Destinations {
 		this.destinationType = destinationType;
 	}
 
+	public Destination() {
+		super();
+	}
 
 	public int getId() {
 		return id;
@@ -57,13 +60,13 @@ public class Destinations {
 	}
 
 
-	public int getCityID() {
-		return cityID;
+	public City getCityID() {
+		return city;
 	}
 
 
-	public void setCityID(int cityID) {
-		this.cityID = cityID;
+	public void setCityID(City city) {
+		this.city = city;
 	}
 
 
@@ -169,7 +172,7 @@ public class Destinations {
 
 	@Override
 	public String toString() {
-		return "Destinations [id=" + id + ", cityID=" + cityID + ", priceRange=" + priceRange + ", rating=" + rating
+		return "Destinations [id=" + id + ", cityID=" + city + ", priceRange=" + priceRange + ", rating=" + rating
 				+ ", phoneNumber=" + phoneNumber + ", address=" + address + ", name=" + name + ", timings=" + timings
 				+ ", websiteLink=" + websiteLink + ", latitude=" + latitude + ", longitude=" + longitude
 				+ ", destinationType=" + destinationType + "]";
