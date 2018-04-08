@@ -7,6 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
+/**
+ * Person Representation
+ *
+ */
 @Entity
 public class Person {
 	@Id
