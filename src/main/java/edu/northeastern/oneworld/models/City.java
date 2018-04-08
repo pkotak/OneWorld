@@ -18,7 +18,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * City Representation
  *
  */
-=======
 @Entity
 public class City {
 
