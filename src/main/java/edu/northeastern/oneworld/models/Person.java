@@ -21,6 +21,7 @@ public class Person {
 	private String username;
 	private String password;
 	private Date dob;
+	private Boolean isAdmin;
 
 	/**
 	 * Empty Contructor
@@ -29,8 +30,21 @@ public class Person {
 		super();
 	}
 
+	/**
+	 * @param id
+	 * @param firstName
+	 * @param lastName
+	 * @param phoneNumber
+	 * @param dType
+	 * @param address
+	 * @param email
+	 * @param username
+	 * @param password
+	 * @param dob
+	 * @param isAdmin
+	 */
 	public Person(int id, String firstName, String lastName, String phoneNumber, String dType, String address,
-			String email, String username, String password, Date dob) {
+			String email, String username, String password, Date dob, Boolean isAdmin) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -42,6 +56,7 @@ public class Person {
 		this.username = username;
 		this.password = password;
 		this.dob = dob;
+		this.isAdmin = isAdmin;
 	}
 
 	public int getId() {
@@ -82,6 +97,22 @@ public class Person {
 
 	public void setdType(String dType) {
 		this.dType = dType;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public Boolean getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(Boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 	public String getEmail() {
@@ -127,7 +158,7 @@ public class Person {
 	public String toString() {
 		return "Person [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber="
 				+ phoneNumber + ", dType=" + dType + ", address=" + address + ", email=" + email + ", username="
-				+ username + ", password=" + password + ", dob=" + dob + "]";
+				+ username + ", password=" + password + ", dob=" + dob + ", isAdmin=" + isAdmin + "]";
 	}
 
 }

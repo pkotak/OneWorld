@@ -15,16 +15,31 @@ import org.springframework.web.bind.annotation.RestController;
 import edu.northeastern.oneworld.models.Person;
 import edu.northeastern.oneworld.repositories.PersonRepository;
 
+/**
+ * Person Service class
+ *
+ */
 @RestController
 public class PersonService {
 	@Autowired
 	PersonRepository personRepository;
 
+	/**
+	 * Method to create a new Person
+	 * @param person person object
+	 * @return Person
+	 */
 	@PostMapping("/api/person")
 	public Person createPerson(@RequestBody Person person) {
 		return personRepository.save(person);
 	}
 
+	/**
+	 * Method to find all people 
+	 * @param username
+	 * @param password
+	 * @return
+	 */
 	@GetMapping("/api/person")
 	public Iterable<Person> findAllPeople(@RequestParam(name = "username", required = false) String username,
 			@RequestParam(name = "password", required = false) String password) {
