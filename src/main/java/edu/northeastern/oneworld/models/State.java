@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -28,13 +31,15 @@ public class State {
 	@OneToMany(mappedBy = "state")
 	@JsonIgnore
 	private List<City> cities;
-	
-	
+	@ManyToMany
+	@JoinTable(name = "TRIPS_STATE", joinColumns = @JoinColumn(name = "STATE_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "TRIP_ID", referencedColumnName = "ID"))
+	@JsonIgnore
+	private List<Trip> tripsInState;
+
 	public State() {
 		super();
 	}
-	
-	
+
 	public State(int id, Country country, String name, List<City> cities) {
 		super();
 		this.id = id;
@@ -42,43 +47,42 @@ public class State {
 		this.name = name;
 		this.cities = cities;
 	}
-	
+
 	public int getId() {
 		return id;
 	}
-	
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	
+
 	public Country getCountry() {
 		return country;
 	}
-	
+
 	public void setCountry(Country country) {
 		this.country = country;
 	}
-	
+
 	public String getName() {
 		return name;
 	}
-	
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public List<City> getCities() {
 		return cities;
 	}
-	
+
 	public void setCities(List<City> cities) {
 		this.cities = cities;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "State [id=" + id + ", country=" + country + ", name=" + name + ", cities=" + cities + "]";
 	}
-	
-	
+
 }
