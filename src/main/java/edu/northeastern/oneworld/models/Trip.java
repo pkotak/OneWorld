@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,7 +21,8 @@ public class Trip {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private Person person;
+	@ManyToOne()
+	private User user;
 	private int tripDuration;
 	@OneToMany(mappedBy = "trip")
 	@JsonIgnore
@@ -38,11 +40,11 @@ public class Trip {
 	}
 
 	
-	public Trip(int id, Person person, int tripDuration, List<Event> events, List<Country> countries, List<City> cities,
+	public Trip(int id, User user, int tripDuration, List<Event> events, List<Country> countries, List<City> cities,
 			List<State> states) {
 		super();
 		this.id = id;
-		this.person = person;
+		this.user = user;
 		this.tripDuration = tripDuration;
 		this.events = events;
 		this.countries = countries;
@@ -99,12 +101,12 @@ public class Trip {
 		this.id = id;
 	}
 
-	public Person getPerson() {
-		return person;
+	public Person getUser() {
+		return user;
 	}
 
-	public void setPerson(Person person) {
-		this.person = person;
+	public void setPerson(User user) {
+		this.user = user;
 	}
 
 	public int getTripDuration() {
@@ -117,7 +119,7 @@ public class Trip {
 
 	@Override
 	public String toString() {
-		return "Trip [id=" + id + ", person=" + person + ", tripDuration=" + tripDuration + ", events=" + events
+		return "Trip [id=" + id + ", user=" + user + ", tripDuration=" + tripDuration + ", events=" + events
 				+ ", countries=" + countries + ", cities=" + cities + ", states=" + states + "]";
 	}
 

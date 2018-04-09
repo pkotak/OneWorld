@@ -20,7 +20,7 @@ public class Review {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@ManyToOne
+	@ManyToOne()
 	@JsonIgnore
 	private User user;
 	private int rating;
