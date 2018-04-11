@@ -1,5 +1,6 @@
 package edu.northeastern.oneworld.models;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import javax.persistence.Entity;
@@ -8,28 +9,27 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
-
-
 /**
  * Person Representation
  *
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Person {
+public class Person implements Serializable {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	private String firstName;
 	private String lastName;
 	private String phoneNumber;
-	private String dType;
 	private String address;
 	private String email;
 	private String username;
 	private String password;
 	private Date dob;
 	private Boolean isAdmin;
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * Empty Contructor
@@ -51,14 +51,13 @@ public class Person {
 	 * @param dob
 	 * @param isAdmin
 	 */
-	public Person(int id, String firstName, String lastName, String phoneNumber, String dType, String address,
-			String email, String username, String password, Date dob, Boolean isAdmin) {
+	public Person(int id, String firstName, String lastName, String phoneNumber, String address, String email,
+			String username, String password, Date dob, Boolean isAdmin) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
-		this.dType = dType;
 		this.address = address;
 		this.email = email;
 		this.username = username;
@@ -89,14 +88,6 @@ public class Person {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-	}
-
-	public String getdType() {
-		return dType;
-	}
-
-	public void setdType(String dType) {
-		this.dType = dType;
 	}
 
 	public String getPhoneNumber() {
@@ -155,18 +146,11 @@ public class Person {
 		this.dob = dob;
 	}
 
-	public void set(Person newPerson) {
-		this.username = newPerson.username != null ? newPerson.username : this.username;
-		this.password = newPerson.password != null ? newPerson.password : this.password;
-		this.firstName = newPerson.firstName != null ? newPerson.firstName : this.firstName;
-		this.lastName = newPerson.lastName != null ? newPerson.lastName : this.lastName;
-	}
-
 	@Override
 	public String toString() {
 		return "Person [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber="
-				+ phoneNumber + ", dType=" + dType + ", address=" + address + ", email=" + email + ", username="
-				+ username + ", password=" + password + ", dob=" + dob + ", isAdmin=" + isAdmin + "]";
+				+ phoneNumber + ", address=" + address + ", email=" + email + ", username=" + username + ", password="
+				+ password + ", dob=" + dob + ", isAdmin=" + isAdmin + "]";
 	}
 
 }

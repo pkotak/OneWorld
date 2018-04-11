@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity
-public class Like {
+public class UserLike {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,17 +22,11 @@ public class Like {
 	@JsonIgnore
 	private User user;
 	
-	
-	@Override
-	public String toString() {
-		return "Like [id=" + id + ", review=" + review + "]";
-	}
-	
-	public Like() {
+	public UserLike() {
 		super();
 	}
 	
-	public Like(int id, Review review, User user) {
+	public UserLike(int id, Review review, User user) {
 		super();
 		this.id = id;
 		this.review = review;
@@ -62,7 +56,10 @@ public class Like {
 		this.user = user;
 	}
 	
-	
+	@Override
+	public String toString() {
+		return "Like [id=" + id + ", review=" + review + "]";
+	}
 	
 	
 }

@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 /**
@@ -14,15 +11,10 @@ import javax.persistence.OneToMany;
  *
  */
 @Entity
-public class User extends Person implements Serializable{
-	/**
-	 * 
-	 */
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+public class User extends Person implements Serializable {
+
 	@OneToMany(mappedBy = "user")
-	private List<Like> likes;
+	private List<UserLike> likes;
 	@OneToMany(mappedBy = "user")
 	private List<Review> reviews;
 	@OneToMany(mappedBy = "user")
@@ -30,9 +22,8 @@ public class User extends Person implements Serializable{
 	private Boolean isVerified;
 	private static final long serialVersionUID = 1L;
 
-	public User(int id, List<Like> likes, List<Review> reviews, List<Trip> trips, Boolean isVerified) {
+	public User(List<UserLike> likes, List<Review> reviews, List<Trip> trips, Boolean isVerified) {
 		super();
-		this.id = id;
 		this.likes = likes;
 		this.reviews = reviews;
 		this.trips = trips;
@@ -43,19 +34,11 @@ public class User extends Person implements Serializable{
 		super();
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public List<Like> getLikes() {
+	public List<UserLike> getLikes() {
 		return likes;
 	}
 
-	public void setLikes(List<Like> likes) {
+	public void setLikes(List<UserLike> likes) {
 		this.likes = likes;
 	}
 
@@ -83,10 +66,26 @@ public class User extends Person implements Serializable{
 		this.trips = trips;
 	}
 
+	public void set(User newUser) {
+		this.setUsername(newUser.getUsername() != null ? newUser.getUsername() : this.getUsername());
+		this.setPassword(newUser.getPassword() != null ? newUser.getPassword() : this.getPassword());
+		this.setFirstName(newUser.getFirstName() != null ? newUser.getFirstName() : this.getFirstName());
+		this.setLastName(newUser.getLastName() != null ? newUser.getLastName() : this.getLastName());
+		this.setDob(newUser.getDob() != null ? newUser.getDob() : this.getDob());
+		this.setEmail(newUser.getEmail() != null ? newUser.getEmail() : this.getEmail());
+		this.setIsAdmin(newUser.getIsAdmin() != null ? newUser.getIsAdmin() : this.getIsAdmin());
+		this.setAddress(newUser.getAddress() != null ? newUser.getAddress() : this.getAddress());
+		this.setPhoneNumber(newUser.getPhoneNumber() != null ? newUser.getPhoneNumber() : this.getPhoneNumber());
+		this.setTrips(newUser.getTrips() != null ? newUser.getTrips() : this.getTrips());
+		this.setLikes(newUser.getLikes() != null ? newUser.getLikes() : this.getLikes());
+		this.setIsVerified(newUser.getIsVerified() != null ? newUser.getIsVerified() : this.getIsVerified());
+
+	}
+
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", likes=" + likes + ", reviews=" + reviews + ", trips=" + trips + ", isVerified="
-				+ isVerified + "]";
+		return "User [likes=" + likes + ", reviews=" + reviews + ", trips=" + trips + ", isVerified=" + isVerified
+				+ "]";
 	}
 
 }
