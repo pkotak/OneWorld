@@ -4,9 +4,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-import edu.northeastern.oneworld.models.User;
+import edu.northeastern.oneworld.models.Owner;
 
-public interface UserRepository extends CrudRepository<User, Integer>{
+public interface OwnerRepository extends CrudRepository<Owner, Integer>{
 
 	/**
 	 * Method to find user by username
@@ -14,7 +14,7 @@ public interface UserRepository extends CrudRepository<User, Integer>{
 	 * @return Person
 	 */
 	@Query("SELECT u FROM Person u WHERE u.username=:username")
-	Iterable<User> findUserByUsername(@Param("username") String u);
+	Iterable<Owner> findUserByUsername(@Param("username") String u);
 
 	/**
 	 * Method to find user by credentials
@@ -23,5 +23,5 @@ public interface UserRepository extends CrudRepository<User, Integer>{
 	 * @return Person
 	 */
 	@Query("SELECT u FROM Person u WHERE u.username=:username AND u.password=:password")
-	Iterable<User> findUserByCredentials(@Param("username") String username, @Param("password") String password);
+	Iterable<Owner> findUserByCredentials(@Param("username") String username, @Param("password") String password);
 }
