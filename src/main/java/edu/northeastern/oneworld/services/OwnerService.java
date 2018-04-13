@@ -33,7 +33,7 @@ public class OwnerService {
 
 	/**
 	 * Method to find all people 
-	 * @param ownername
+	 * @param username
 	 * @param password
 	 * @return
 	 */
