@@ -2,12 +2,7 @@ package edu.northeastern.oneworld.models;
 
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,37 +19,37 @@ public class Destination {
 	@ManyToOne
 	@JsonIgnore
 	private City city;
+	@ManyToOne
+	@JsonIgnore
+	private Trip trip;
+	private String placeId;
 	private int priceRange;
 	private int rating;
 	private int phoneNumber;
 	private String address;
+	private String photoReference;
 	private String name;
 	private String timings;
 	private String websiteLink;
 	private double latitude;
 	private double longitude;
 	private String destinationType;
-	@OneToMany
-	@JsonIgnore
-	private List<Event> events;
 
-	public Destination(int id, City city, int priceRange, int rating, int phoneNumber, String address, String name,
-			String timings, String websiteLink, double latitude, double longitude, String destinationType,
-			List<Event> events) {
-		super();
-		this.id = id;
+	public Destination(City city, Trip trip, String placeId, int priceRange, int rating, int phoneNumber, String address, String photoReference, String name, String timings, String websiteLink, double latitude, double longitude, String destinationType) {
 		this.city = city;
+		this.trip = trip;
+		this.placeId = placeId;
 		this.priceRange = priceRange;
 		this.rating = rating;
 		this.phoneNumber = phoneNumber;
 		this.address = address;
+		this.photoReference = photoReference;
 		this.name = name;
 		this.timings = timings;
 		this.websiteLink = websiteLink;
 		this.latitude = latitude;
 		this.longitude = longitude;
 		this.destinationType = destinationType;
-		this.events = events;
 	}
 
 	public Destination() {
@@ -87,6 +82,14 @@ public class Destination {
 
 	public int getRating() {
 		return rating;
+	}
+
+	public String getPhotoReference() {
+		return photoReference;
+	}
+
+	public void setPhotoReference(String photoReference) {
+		this.photoReference = photoReference;
 	}
 
 	public void setRating(int rating) {
@@ -157,20 +160,40 @@ public class Destination {
 		this.destinationType = destinationType;
 	}
 
-	public List<Event> getEvents() {
-		return events;
+	public Trip getTrip() {
+		return trip;
 	}
 
-	public void setEvents(List<Event> events) {
-		this.events = events;
+	public void setTrip(Trip trip) {
+		this.trip = trip;
+	}
+
+	public String getPlaceId() {
+		return placeId;
+	}
+
+	public void setPlaceId(String placeId) {
+		this.placeId = placeId;
 	}
 
 	@Override
 	public String toString() {
-		return "Destination [id=" + id + ", city=" + city + ", priceRange=" + priceRange + ", rating=" + rating
-				+ ", phoneNumber=" + phoneNumber + ", address=" + address + ", name=" + name + ", timings=" + timings
-				+ ", websiteLink=" + websiteLink + ", latitude=" + latitude + ", longitude=" + longitude
-				+ ", destinationType=" + destinationType + "]";
+		return "Destination{" +
+				"id=" + id +
+				", city=" + city +
+				", trip=" + trip +
+				", placeId='" + placeId + '\'' +
+				", priceRange=" + priceRange +
+				", rating=" + rating +
+				", phoneNumber=" + phoneNumber +
+				", address='" + address + '\'' +
+				", photoReference='" + photoReference + '\'' +
+				", name='" + name + '\'' +
+				", timings='" + timings + '\'' +
+				", websiteLink='" + websiteLink + '\'' +
+				", latitude=" + latitude +
+				", longitude=" + longitude +
+				", destinationType='" + destinationType + '\'' +
+				'}';
 	}
-
 }

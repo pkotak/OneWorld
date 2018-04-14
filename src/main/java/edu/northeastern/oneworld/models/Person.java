@@ -43,7 +43,6 @@ public class Person implements Serializable {
 	 * @param firstName
 	 * @param lastName
 	 * @param phoneNumber
-	 * @param dType
 	 * @param address
 	 * @param email
 	 * @param username
