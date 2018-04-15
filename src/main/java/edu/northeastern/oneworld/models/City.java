@@ -34,24 +34,18 @@ public class City {
 	@OneToMany(mappedBy = "city")
 	@JsonIgnore
 	private List<Destination> destinations;
-	@ManyToMany
-	@JoinTable(name = "TRIPS_CITY", joinColumns = @JoinColumn(name = "CITY_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "TRIP_ID", referencedColumnName = "ID"))
-	@JsonIgnore
-	private List<Trip> tripsInCity;
 
 	public City() {
 		super();
 	}
 
-	public City(int id, Country country, State state, String name, List<Destination> destinations,
-			List<Trip> tripsInCity) {
+	public City(int id, Country country, State state, String name, List<Destination> destinations) {
 		super();
 		this.id = id;
 		this.country = country;
 		this.state = state;
 		this.name = name;
 		this.destinations = destinations;
-		this.tripsInCity = tripsInCity;
 	}
 
 	public int getId() {
@@ -94,18 +88,10 @@ public class City {
 		this.destinations = destinations;
 	}
 
-	public List<Trip> getTripsInCity() {
-		return tripsInCity;
-	}
-
-	public void setTripsInCity(List<Trip> tripsInCity) {
-		this.tripsInCity = tripsInCity;
-	}
-
 	@Override
 	public String toString() {
 		return "City [id=" + id + ", country=" + country + ", state=" + state + ", name=" + name + ", destinations="
-				+ destinations + ", tripsInCity=" + tripsInCity + "]";
+				+ destinations +"]";
 	}
 
 }
