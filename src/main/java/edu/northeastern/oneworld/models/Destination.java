@@ -23,6 +23,9 @@ public class Destination {
 	@JoinTable(name = "DestinationsInTrips")
 	@JsonIgnore
 	private List<Trip> trips;
+	@OneToMany(mappedBy = "destination")
+	@JsonIgnore
+	private List<Review> reviews;
 	private String placeId;
 	private int priceRange;
 	private int rating;
@@ -36,9 +39,10 @@ public class Destination {
 	private double longitude;
 	private String destinationType;
 
-	public Destination(City city, List<Trip> trips, String placeId, int priceRange, int rating, int phoneNumber, String address, String photoReference, String name, String timings, String websiteLink, double latitude, double longitude, String destinationType) {
+	public Destination(City city, List<Trip> trips, List<Review> reviews, String placeId, int priceRange, int rating, int phoneNumber, String address, String photoReference, String name, String timings, String websiteLink, double latitude, double longitude, String destinationType) {
 		this.city = city;
 		this.trips = trips;
+		this.reviews = reviews;
 		this.placeId = placeId;
 		this.priceRange = priceRange;
 		this.rating = rating;
@@ -161,12 +165,18 @@ public class Destination {
 		this.destinationType = destinationType;
 	}
 
+	public void setDestinationReviews(Review review){
+		this.reviews.add(review);
+		if(review.getDestination() != this)
+			review.setDestination(this);
+	}
 	@Override
 	public String toString() {
 		return "Destination{" +
 				"id=" + id +
 				", city=" + city +
 				", trips=" + trips +
+				", reviews=" + reviews +
 				", placeId='" + placeId + '\'' +
 				", priceRange=" + priceRange +
 				", rating=" + rating +
@@ -180,6 +190,14 @@ public class Destination {
 				", longitude=" + longitude +
 				", destinationType='" + destinationType + '\'' +
 				'}';
+	}
+
+	public List<Review> getReviews() {
+		return reviews;
+	}
+
+	public void setReviews(List<Review> reviews) {
+		this.reviews = reviews;
 	}
 
 	public List<Trip> getTrips() {

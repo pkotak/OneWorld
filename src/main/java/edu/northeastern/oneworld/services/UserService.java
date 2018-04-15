@@ -2,6 +2,7 @@ package edu.northeastern.oneworld.services;
 
 import java.util.Optional;
 
+import edu.northeastern.oneworld.models.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,6 +67,22 @@ public class UserService {
         return userRepository.findById(id);
     }
 
+
+    /**
+     * Find a specific user's reviews
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/api/user/{userId}/review")
+    public Iterable<Review> findReviewForUser(@PathVariable("userId") int id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if(optionalUser.isPresent()){
+            User user = optionalUser.get();
+            return user.getReviews();
+        }
+        return null;
+    }
     /**
      * @param id
      * @param newuser

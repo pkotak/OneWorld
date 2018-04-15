@@ -2,6 +2,7 @@ package edu.northeastern.oneworld.services;
 
 import com.google.gson.Gson;
 import edu.northeastern.oneworld.models.Destination;
+import edu.northeastern.oneworld.models.Review;
 import edu.northeastern.oneworld.models.Trip;
 import edu.northeastern.oneworld.repositories.DestinationRepository;
 import edu.northeastern.oneworld.repositories.TripRepository;
@@ -45,13 +46,13 @@ public class DestinationService {
         return destinationRepository.findDestinationById(id);
     }
 
-    @GetMapping("/api/destination/{name}")
-    public Optional<Destination> findDestinationByName(@PathVariable("name") String name){
-        return destinationRepository.findDestinationByName(name);
-    }
-
-    @GetMapping("/api/destination/{rating}")
-    public List<Destination> findDestinationByRating(@PathVariable("rating") int rating){
-        return destinationRepository.findDestinationByRating(rating);
+    @GetMapping("/api/destination/{dId}/review")
+    public Iterable<Review> getReviewsForDestination(@PathVariable("dId") String id){
+        Optional<Destination> optionalDestination = destinationRepository.findDestinationById(id);
+        if(optionalDestination.isPresent()){
+            Destination d = optionalDestination.get();
+            return d.getReviews();
+        }
+        return null;
     }
 }

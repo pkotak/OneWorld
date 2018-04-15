@@ -7,156 +7,119 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Date;
 
 
 /**
  * Review Representation
- *
  */
 @Entity
 public class Review {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	@ManyToOne()
-	@JsonIgnore
-	private User user;
-	private int rating;
-	private String description;
-	private Date dateOfReview;
-	private long numberOfLikes;
-	@ManyToOne
-	@JsonIgnore
-	private Destination destination;
-	private DestinationType placeType;
-	
-
-	
-	public Review() {
-		super();
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @ManyToOne()
+    @JsonIgnore
+    private User user;
+    private String description;
+    private Date dateOfReview;
+    private long numberOfLikes;
+    @ManyToOne
+    @JsonIgnore
+    private Destination destination;
 
 
-
-	public Review(int id, User user, int rating, String description, Date dateOfReview, long numberOfLikes,
-			Destination destination, DestinationType placeType) {
-		super();
-		this.id = id;
-		this.user = user;
-		this.rating = rating;
-		this.description = description;
-		this.dateOfReview = dateOfReview;
-		this.numberOfLikes = numberOfLikes;
-		this.destination = destination;
-		this.placeType = placeType;
-	}
+    public Review() {
+        super();
+    }
 
 
-
-	public int getId() {
-		return id;
-	}
-
-
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-
-
-	public User getUser() {
-		return user;
-	}
+    public Review(int id, User user, int rating, String description, Date dateOfReview, long numberOfLikes,
+                  Destination destination, DestinationType placeType) {
+        super();
+        this.id = id;
+        this.user = user;
+        this.description = description;
+        this.dateOfReview = dateOfReview;
+        this.numberOfLikes = numberOfLikes;
+        this.destination = destination;
+    }
 
 
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
+    public int getId() {
+        return id;
+    }
 
 
-	public int getRating() {
-		return rating;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
 
-
-	public void setRating(int rating) {
-		this.rating = rating;
-	}
-
+    public User getUser() {
+        return user;
+    }
 
 
-	public String getDescription() {
-		return description;
-	}
+    public void setUser(User user) {
+        this.user = user;
+    }
 
 
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
+    public String getDescription() {
+        return description;
+    }
 
 
-	public Date getDateOfReview() {
-		return dateOfReview;
-	}
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
 
-
-	public void setDateOfReview(Date dateOfReview) {
-		this.dateOfReview = dateOfReview;
-	}
-
+    public Date getDateOfReview() {
+        return dateOfReview;
+    }
 
 
-	public long getNumberOfLikes() {
-		return numberOfLikes;
-	}
+    public void setDateOfReview(Date dateOfReview) {
+        this.dateOfReview = dateOfReview;
+    }
 
 
-
-	public void setNumberOfLikes(long numberOfLikes) {
-		this.numberOfLikes = numberOfLikes;
-	}
-
+    public long getNumberOfLikes() {
+        return numberOfLikes;
+    }
 
 
-	public Destination getDestination() {
-		return destination;
-	}
+    public void setNumberOfLikes(long numberOfLikes) {
+        this.numberOfLikes = numberOfLikes;
+    }
 
 
-
-	public void setDestination(Destination destination) {
-		this.destination = destination;
-	}
-
+    public Destination getDestination() {
+        return destination;
+    }
 
 
-	public DestinationType getPlaceType() {
-		return placeType;
-	}
+    public void setDestination(Destination destination) {
+        this.destination = destination;
+        if(!destination.getReviews().contains(this))
+            destination.getReviews().add(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Review{" +
+                "id=" + id +
+                ", user=" + user +
+                ", description='" + description + '\'' +
+                ", dateOfReview=" + dateOfReview +
+                ", numberOfLikes=" + numberOfLikes +
+                ", destination=" + destination +
+                '}';
+    }
 
 
-
-	public void setPlaceType(DestinationType placeType) {
-		this.placeType = placeType;
-	}
-
-
-
-	@Override
-	public String toString() {
-		return "Review [id=" + id + ", rating=" + rating + ", description=" + description + ", dateOfReview="
-				+ dateOfReview + ", numberOfLikes=" + numberOfLikes + ", destination=" + destination + ", placeType="
-				+ placeType + "]";
-	}
-	
-	
 }
