@@ -19,9 +19,10 @@ public class Destination {
 	@ManyToOne
 	@JsonIgnore
 	private City city;
-	@ManyToOne
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "DestinationsInTrips")
 	@JsonIgnore
-	private Trip trip;
+	private List<Trip> trips;
 	private String placeId;
 	private int priceRange;
 	private int rating;
@@ -35,9 +36,9 @@ public class Destination {
 	private double longitude;
 	private String destinationType;
 
-	public Destination(City city, Trip trip, String placeId, int priceRange, int rating, int phoneNumber, String address, String photoReference, String name, String timings, String websiteLink, double latitude, double longitude, String destinationType) {
+	public Destination(City city, List<Trip> trips, String placeId, int priceRange, int rating, int phoneNumber, String address, String photoReference, String name, String timings, String websiteLink, double latitude, double longitude, String destinationType) {
 		this.city = city;
-		this.trip = trip;
+		this.trips = trips;
 		this.placeId = placeId;
 		this.priceRange = priceRange;
 		this.rating = rating;
@@ -160,28 +161,12 @@ public class Destination {
 		this.destinationType = destinationType;
 	}
 
-	public Trip getTrip() {
-		return trip;
-	}
-
-	public void setTrip(Trip trip) {
-		this.trip = trip;
-	}
-
-	public String getPlaceId() {
-		return placeId;
-	}
-
-	public void setPlaceId(String placeId) {
-		this.placeId = placeId;
-	}
-
 	@Override
 	public String toString() {
 		return "Destination{" +
 				"id=" + id +
 				", city=" + city +
-				", trip=" + trip +
+				", trips=" + trips +
 				", placeId='" + placeId + '\'' +
 				", priceRange=" + priceRange +
 				", rating=" + rating +
@@ -195,5 +180,26 @@ public class Destination {
 				", longitude=" + longitude +
 				", destinationType='" + destinationType + '\'' +
 				'}';
+	}
+
+	public List<Trip> getTrips() {
+		return trips;
+	}
+
+	public void addToTrip(Trip trip){
+		this.trips.add(trip);
+		if(! trip.getDestinations().contains(this))
+			trip.getDestinations().add(this);
+	}
+	public void setTrips(List<Trip> trips) {
+		this.trips = trips;
+	}
+
+	public String getPlaceId() {
+		return placeId;
+	}
+
+	public void setPlaceId(String placeId) {
+		this.placeId = placeId;
 	}
 }

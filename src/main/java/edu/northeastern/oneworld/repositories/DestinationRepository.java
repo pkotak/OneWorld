@@ -30,5 +30,4 @@ public interface DestinationRepository extends CrudRepository<Destination, Integ
      */
     @Query("SELECT d FROM Destination d WHERE d.rating>=:rating")
     List<Destination> findDestinationByRating(@Param("rating") int rating);
-
 }
