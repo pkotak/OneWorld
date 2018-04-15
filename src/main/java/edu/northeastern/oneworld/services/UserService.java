@@ -39,6 +39,26 @@ public class UserService {
     }
 
     /**
+     * Method to create a new user
+     *
+     * @param username
+     * @param password
+     * @return int
+     */
+    @PostMapping("/api/user/login")
+    public int createUser(@RequestParam(name = "username", required = false) String username,
+                           @RequestParam(name = "password", required = false) String password) {
+        if (userRepository.findUserByCredentials(username, password) != null){
+            //if(userRepository.isUserAdmin(username)){
+                return 1;
+            //}
+            //else
+            //    return 2;
+        }
+        else
+            return 0;
+    }
+    /**
      * Method to find all people
      *
      * @param username
