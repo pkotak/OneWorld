@@ -31,21 +31,23 @@ public class City {
 	@JsonIgnore
 	private State state;
 	private String name;
-	@OneToMany(mappedBy = "city")
+	@ManyToMany
+	@JoinTable(name = "TRIPS_CITY", joinColumns = @JoinColumn(name = "CITY_ID", referencedColumnName = "ID"), inverseJoinColumns = @JoinColumn(name = "TRIP_ID", referencedColumnName = "ID"))
 	@JsonIgnore
-	private List<Destination> destinations;
+	private List<Trip> tripsInCity;
 
 	public City() {
 		super();
 	}
 
-	public City(int id, Country country, State state, String name, List<Destination> destinations) {
+	public City(int id, Country country, State state, String name,
+			List<Trip> tripsInCity) {
 		super();
 		this.id = id;
 		this.country = country;
 		this.state = state;
 		this.name = name;
-		this.destinations = destinations;
+		this.tripsInCity = tripsInCity;
 	}
 
 	public int getId() {
@@ -80,18 +82,17 @@ public class City {
 		this.name = name;
 	}
 
-	public List<Destination> getDestinations() {
-		return destinations;
+	public List<Trip> getTripsInCity() {
+		return tripsInCity;
 	}
 
-	public void setDestinations(List<Destination> destinations) {
-		this.destinations = destinations;
+	public void setTripsInCity(List<Trip> tripsInCity) {
+		this.tripsInCity = tripsInCity;
 	}
 
 	@Override
 	public String toString() {
-		return "City [id=" + id + ", country=" + country + ", state=" + state + ", name=" + name + ", destinations="
-				+ destinations +"]";
+		return "City [id=" + id + ", country=" + country + ", state=" + state + ", name=" + name + ", tripsInCity=" + tripsInCity + "]";
 	}
 
 }

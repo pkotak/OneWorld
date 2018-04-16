@@ -22,6 +22,7 @@ public class DestinationService {
     TripRepository tripRepository;
 
     @PostMapping("/api/destination")
+    @CrossOrigin(origins = "http://localhost:63343")
     public Destination saveDestination(@RequestBody String json){
         Gson g = new Gson();
         Destination destination = g.fromJson(json, Destination.class);

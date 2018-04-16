@@ -16,9 +16,6 @@ public class Destination {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	@ManyToOne
-	@JsonIgnore
-	private City city;
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "DestinationsInTrips")
 	@JsonIgnore
@@ -28,7 +25,7 @@ public class Destination {
 	private List<Review> reviews;
 	private String placeId;
 	private int priceRange;
-	private int rating;
+	private double rating;
 	private int phoneNumber;
 	private String address;
 	private String photoReference;
@@ -37,10 +34,11 @@ public class Destination {
 	private String websiteLink;
 	private double latitude;
 	private double longitude;
+	private String city;
+	private String country;
 	private String destinationType;
 
-	public Destination(City city, List<Trip> trips, List<Review> reviews, String placeId, int priceRange, int rating, int phoneNumber, String address, String photoReference, String name, String timings, String websiteLink, double latitude, double longitude, String destinationType) {
-		this.city = city;
+	public Destination(List<Trip> trips, List<Review> reviews, String placeId, int priceRange, double rating, int phoneNumber, String address, String photoReference, String name, String timings, String websiteLink, double latitude, double longitude, String city, String country, String destinationType) {
 		this.trips = trips;
 		this.reviews = reviews;
 		this.placeId = placeId;
@@ -54,6 +52,8 @@ public class Destination {
 		this.websiteLink = websiteLink;
 		this.latitude = latitude;
 		this.longitude = longitude;
+		this.city = city;
+		this.country = country;
 		this.destinationType = destinationType;
 	}
 
@@ -69,14 +69,6 @@ public class Destination {
 		this.id = id;
 	}
 
-	public City getCity() {
-		return city;
-	}
-
-	public void setCity(City city) {
-		this.city = city;
-	}
-
 	public int getPriceRange() {
 		return priceRange;
 	}
@@ -85,7 +77,7 @@ public class Destination {
 		this.priceRange = priceRange;
 	}
 
-	public int getRating() {
+	public double getRating() {
 		return rating;
 	}
 
@@ -97,7 +89,7 @@ public class Destination {
 		this.photoReference = photoReference;
 	}
 
-	public void setRating(int rating) {
+	public void setRating(double rating) {
 		this.rating = rating;
 	}
 
@@ -165,31 +157,26 @@ public class Destination {
 		this.destinationType = destinationType;
 	}
 
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
 	public void setDestinationReviews(Review review){
 		this.reviews.add(review);
 		if(review.getDestination() != this)
 			review.setDestination(this);
-	}
-	@Override
-	public String toString() {
-		return "Destination{" +
-				"id=" + id +
-				", city=" + city +
-				", trips=" + trips +
-				", reviews=" + reviews +
-				", placeId='" + placeId + '\'' +
-				", priceRange=" + priceRange +
-				", rating=" + rating +
-				", phoneNumber=" + phoneNumber +
-				", address='" + address + '\'' +
-				", photoReference='" + photoReference + '\'' +
-				", name='" + name + '\'' +
-				", timings='" + timings + '\'' +
-				", websiteLink='" + websiteLink + '\'' +
-				", latitude=" + latitude +
-				", longitude=" + longitude +
-				", destinationType='" + destinationType + '\'' +
-				'}';
 	}
 
 	public List<Review> getReviews() {
@@ -219,5 +206,28 @@ public class Destination {
 
 	public void setPlaceId(String placeId) {
 		this.placeId = placeId;
+	}
+
+	@Override
+	public String toString() {
+		return "Destination{" +
+				"id=" + id +
+				", trips=" + trips +
+				", reviews=" + reviews +
+				", placeId='" + placeId + '\'' +
+				", priceRange=" + priceRange +
+				", rating=" + rating +
+				", phoneNumber=" + phoneNumber +
+				", address='" + address + '\'' +
+				", photoReference='" + photoReference + '\'' +
+				", name='" + name + '\'' +
+				", timings='" + timings + '\'' +
+				", websiteLink='" + websiteLink + '\'' +
+				", latitude=" + latitude +
+				", longitude=" + longitude +
+				", city='" + city + '\'' +
+				", country='" + country + '\'' +
+				", destinationType='" + destinationType + '\'' +
+				'}';
 	}
 }

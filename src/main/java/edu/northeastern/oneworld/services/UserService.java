@@ -4,14 +4,7 @@ import java.util.Optional;
 
 import edu.northeastern.oneworld.models.Review;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import edu.northeastern.oneworld.models.Trip;
 import edu.northeastern.oneworld.models.User;
@@ -46,14 +39,15 @@ public class UserService {
      * @return int
      */
     @PostMapping("/api/user/login")
+    @CrossOrigin(origins = "http://localhost:63342")
     public int createUser(@RequestParam(name = "username", required = false) String username,
                            @RequestParam(name = "password", required = false) String password) {
         if (userRepository.findUserByCredentials(username, password) != null){
-            //if(userRepository.isUserAdmin(username)){
+            if(userRepository.isUserAdmin(username)){
                 return 1;
-            //}
-            //else
-            //    return 2;
+            }
+            else
+                return 2;
         }
         else
             return 0;

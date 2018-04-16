@@ -1,4 +1,4 @@
-/*
+
 $(document).ready(function() {
     $('#submit').click(function() {
 
@@ -14,7 +14,7 @@ $(document).ready(function() {
         var password = $("#password").val().trim();
         var msg = "";
 
-        var by_pass = 1
+        var by_pass = 0
 
         if( username != "" && password != ""){
             $.ajax({
@@ -24,11 +24,13 @@ $(document).ready(function() {
                 success:function(response){
 
 
-                    if(response == 1 || by_pass == 1){
-                        window.location.replace("../success.html");
+                    if(response > 0){
+                        // window.location.replace("../success.html");
+                        console.log(response);
                        }
                     else {
-                        $('.error').css('display', 'block'); // show error msg
+                        // $('.error').css('display', 'block'); // show error msg
+                        console.log('error');
                     }
                 }
             });
@@ -36,27 +38,27 @@ $(document).ready(function() {
 
     });
 });
-*/
 
-$(document).ready(function() {
-    //$('#username').focus();
 
-    $('#submit').click(function() {
-
-        event.preventDefault(); // prevent PageReLoad
-
-        var ValidEmail = $('#username').val() === 'jay'; // User validate
-        var ValidPassword = $('#password').val() === 'jay'; // Password validate
-        console.log($('#username').val());
-        console.log($('#password').val());
-        if (ValidEmail === true && ValidPassword === true) { // if ValidEmail & ValidPassword
-        
-            window.location = "../public/success.html"; // go to home.html
-
-        }
-        else {
-            window.location = "../public/error.html";
-
-        }
-    });
-});
+// $(document).ready(function() {
+//     //$('#username').focus();
+//
+//     $('#submit').click(function() {
+//
+//         event.preventDefault(); // prevent PageReLoad
+//
+//         var ValidEmail = $('#username').val() === 'jay'; // User validate
+//         var ValidPassword = $('#password').val() === 'jay'; // Password validate
+//         console.log($('#username').val());
+//         console.log($('#password').val());
+//         if (ValidEmail === true && ValidPassword === true) { // if ValidEmail & ValidPassword
+//
+//             window.location = "../public/success.html"; // go to home.html
+//
+//         }
+//         else {
+//             window.location = "../public/error.html";
+//
+//         }
+//     });
+// });
