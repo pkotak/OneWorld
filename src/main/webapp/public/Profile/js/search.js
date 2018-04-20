@@ -42,7 +42,8 @@ function displayDataCard2() {
           table_body +='<td>';
 
           var buttonId = "updateButton" + index;
-          table_body += "<div class='container'><button class='btn .btnView' id="+buttonId+" name = "+json_obj.cars[j].models[i]+" onclick='update("+index+");'><b>View</b></button></div>";
+
+          table_body += "<div class='container'><button class='btn .btnView' id="+buttonId+" name = "+json_obj.cars[j].models[i]+" onclick='update("+index+");' data-toggle='modal' data-target='#product_view'><b>View</b></button></div>";
           table_body +='</td>';
           table_body+='</tr>';
         }

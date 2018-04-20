@@ -234,6 +234,24 @@ nav.subbar > ul.nav.nav-tabs > li.active > a {
     text-align: center;
   }
 
+
+
+#destinationLike{
+    background-color: black;
+    color: white;
+    height:40px;
+    width:100px;
+    margin: 20px -50px;
+    position:relative;
+    top:20%;
+    left:50%;
+}
+
+#destinationLike:hover {
+    background-color: #2CD892;
+    color: white;
+}
+
   .container .btnView {
       border: 1px;
   }
