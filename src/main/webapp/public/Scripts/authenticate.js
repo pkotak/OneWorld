@@ -3,8 +3,10 @@ $(document).ready(function() {
     $('#submit').click(function() {
 
         event.preventDefault(); // prevent PageReLoad
+
         Cookies.set('name', 'value');
         console.log(Cookies.get('name'));
+
         // console.log(1)
         console.log($('#username').val());
         console.log($('#password').val());
@@ -16,12 +18,15 @@ $(document).ready(function() {
         var password = $("#password").val().trim();
         var msg = "";
 
+
         var by_pass = 0
+
 
         if( username != "" && password != ""){
             $.ajax({
                 url:'http://localhost:8080/api/user/login',
                 type:'post',
+
                 contentType: "application/json; charset=utf-8",
                 data:{username:username,password:password},
                 success:function(response){
@@ -32,6 +37,7 @@ $(document).ready(function() {
                     }else{
                         msg = "Invalid username and password!";
                         alert(msg);
+
                     }
                 }
             });
