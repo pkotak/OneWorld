@@ -293,13 +293,20 @@ nav.subbar > ul.nav.nav-tabs > li.active > a {
     opacity: 0.8;
     border-radius: 5px;
     position: absolute;
-    bottom: 20px;
-    right: 20px;
+    bottom: 20%;
+    right: 15%;
+    left: 15%;
     background-color: white;
     color: black;
-    padding-left: 20px;
-    padding-right: 20px;
-    margin-bottom: 20%;
-    margin-right: 10%;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-bottom: 15%;
+    margin-right: 8%;
+    margin-left: 10%;
+}
 
+
+.text-block h4{
+    align-content: center;
+    text-align: center;
 }

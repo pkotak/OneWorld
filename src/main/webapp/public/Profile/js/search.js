@@ -13,15 +13,7 @@ function displayDataCard2() {
             console.log(response);
         }
     });
-  var json_obj  = {
-      "name":"John",
-      "age":30,
-      "cars": [
-        { "name":"Maruti", "models":[  "T2","Fiesta", "Focus", "Mustang", "TempCar" ] },
-        { "name":"Honda", "models":[ "320", "X3", "X5" ] },
-        { "name":"Hyudai", "models":[ "500", "Panda","550" ] }
-      ]
-    }
+  
   $(document).ready(function(){
 
       var index = 1;
