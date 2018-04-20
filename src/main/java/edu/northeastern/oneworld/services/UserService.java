@@ -12,6 +12,7 @@ import edu.northeastern.oneworld.repositories.TripRepository;
 import edu.northeastern.oneworld.repositories.UserRepository;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:63342")
 public class UserService {
 
     @Autowired
@@ -39,15 +40,13 @@ public class UserService {
      * @return int
      */
     @PostMapping("/api/user/login")
-    @CrossOrigin(origins = "http://localhost:63342")
     public int createUser(@RequestParam(name = "username", required = false) String username,
                            @RequestParam(name = "password", required = false) String password) {
         if (userRepository.findUserByCredentials(username, password) != null){
-            if(userRepository.isUserAdmin(username)){
+//            if(userRepository.isUserAdmin(username)){
+//                return 1;
+//            }
                 return 1;
-            }
-            else
-                return 2;
         }
         else
             return 0;
