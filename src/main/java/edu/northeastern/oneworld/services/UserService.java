@@ -2,7 +2,10 @@ package edu.northeastern.oneworld.services;
 
 import java.util.Optional;
 
+import com.google.gson.Gson;
+import edu.northeastern.oneworld.models.Person;
 import edu.northeastern.oneworld.models.Review;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,19 +38,20 @@ public class UserService {
     /**
      * Method to create a new user
      *
-     * @param username
-     * @param password
+     * @param json
      * @return int
      */
     @PostMapping("/api/user/login")
-    public int createUser(@RequestParam(name = "username", required = false) String username,
-                           @RequestParam(name = "password", required = false) String password) {
+    public int loginUser(@RequestBody String json) {
+        JSONObject object = new JSONObject(json);
+        String username = object.getString("username");
+        String password = object.getString("password");
         if (userRepository.findUserByCredentials(username, password) != null){
-//            if(userRepository.isUserAdmin(username)){
-//                return 1;
-//            }
+            if(userRepository.isUserAdmin(username)){
                 return 1;
-      }
+            }
+                return 2;
+        }
         else
             return 0;
     }

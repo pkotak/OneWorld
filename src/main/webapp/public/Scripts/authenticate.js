@@ -17,8 +17,7 @@ $(document).ready(function() {
         var username = $("#username").val().trim();
         var password = $("#password").val().trim();
         var msg = "";
-
-
+        var object = {username : username, password : password};
         var by_pass = 0
 
 
@@ -28,11 +27,11 @@ $(document).ready(function() {
                 type:'post',
 
                 contentType: "application/json; charset=utf-8",
-                data:{username:username,password:password},
+                data:JSON.stringify(object),
                 success:function(response){
-                    alert('success');
+                    alert(response);
                     if(response == 2){
-                        window.location.replace("../success.html");
+                        window.location.replace("../public/success.html");
                         console.log('success 2');
                     }else{
                         msg = "Invalid username and password!";
