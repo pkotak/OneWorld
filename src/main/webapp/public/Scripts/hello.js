@@ -23,20 +23,7 @@ $(document).ready(function(){
                 success:function(response){
                     var msg = "";
                     if(response != null){
-                        $.ajax({
-                            url:'http://localhost:8080/api/user/login',
-                            type:'post',
-                            contentType: "application/json; charset=utf-8",
-                            data:{username:username,password:password},
-                            success:function(response){
-                                if(response == 1){
-                                    window.location.replace("../success.html");
-                                }else{
-                                    msg = "Invalid username and password!";
-                                    alert(msg);
-                                }
-                            }
-                        });
+                        window.location = "../public/login.html";
                     }else{
                         msg = "Invalid username and password!";
                     }

@@ -8,11 +8,13 @@ import edu.northeastern.oneworld.repositories.DestinationRepository;
 import edu.northeastern.oneworld.repositories.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import sun.security.krb5.internal.crypto.Des;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:63342")
 public class DestinationService {
 
     @Autowired
@@ -22,11 +24,15 @@ public class DestinationService {
     TripRepository tripRepository;
 
     @PostMapping("/api/destination")
-    @CrossOrigin(origins = "http://localhost:63343")
     public Destination saveDestination(@RequestBody String json){
         Gson g = new Gson();
         Destination destination = g.fromJson(json, Destination.class);
         return destinationRepository.save(destination);
+    }
+
+    @GetMapping("/api/destination")
+    public Iterable<Destination> findAllDestinations(){
+        return destinationRepository.findAll();
     }
 
     @PostMapping("/api/destination/{dId}/trip/{tripId}")

@@ -25,13 +25,12 @@ $(document).ready(function() {
             $.ajax({
                 url:'http://localhost:8080/api/user/login',
                 type:'post',
-
                 contentType: "application/json; charset=utf-8",
                 data:JSON.stringify(object),
                 success:function(response){
                     alert(response);
                     if(response == 2){
-                        window.location.replace("../public/success.html");
+                        window.location.replace("../public/Profile/profile.html");
                         console.log('success 2');
                     }else{
                         msg = "Invalid username and password!";

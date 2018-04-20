@@ -6,6 +6,13 @@ $(document).ready(function() {
 
 function displayDataCard2() {
 
+    $.ajax({
+        url:'http://localhost:8080/api/destination',
+        type:'get',
+        success:function(response){
+            console.log(response);
+        }
+    });
   var json_obj  = {
       "name":"John",
       "age":30,
