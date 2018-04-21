@@ -3,14 +3,12 @@ package edu.northeastern.oneworld.services;
 import java.util.Optional;
 
 import com.google.gson.Gson;
-import edu.northeastern.oneworld.models.Person;
-import edu.northeastern.oneworld.models.Review;
+import edu.northeastern.oneworld.models.*;
+import edu.northeastern.oneworld.repositories.UserLikeRepository;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import edu.northeastern.oneworld.models.Trip;
-import edu.northeastern.oneworld.models.User;
 import edu.northeastern.oneworld.repositories.TripRepository;
 import edu.northeastern.oneworld.repositories.UserRepository;
 
@@ -24,6 +22,8 @@ public class UserService {
     @Autowired
     TripRepository tripRepository;
 
+    @Autowired
+    UserLikeRepository userLikeRepository;
     /**
      * Method to create a new user
      *
@@ -122,6 +122,19 @@ public class UserService {
     @DeleteMapping("/api/user/{userId}")
     public void deleteUser(@PathVariable("userId") int id) {
         userRepository.deleteById(id);
+    }
+
+
+    @PostMapping("/api/user/review/like")
+    public UserLike likeReview(@RequestBody String json){
+        Gson g = new Gson();
+        UserLike userLike = g.fromJson(json, UserLike.class);
+        return userLikeRepository.save(userLike);
+    }
+
+    @DeleteMapping("/api/user/review/like/{lId}")
+    public void unlikeReview(@PathVariable("lId") int id){
+        userLikeRepository.deleteById(id);
     }
 
 }

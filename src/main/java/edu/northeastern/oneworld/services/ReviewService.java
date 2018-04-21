@@ -1,14 +1,11 @@
 package edu.northeastern.oneworld.services;
 
-import edu.northeastern.oneworld.models.Destination;
-import edu.northeastern.oneworld.models.Owner;
-import edu.northeastern.oneworld.models.Review;
-import edu.northeastern.oneworld.models.User;
+import edu.northeastern.oneworld.models.*;
 import edu.northeastern.oneworld.repositories.DestinationRepository;
 import edu.northeastern.oneworld.repositories.ReviewRepository;
+import edu.northeastern.oneworld.repositories.UserLikeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import sun.security.krb5.internal.crypto.Des;
 
 import java.util.Optional;
 
@@ -27,7 +24,7 @@ public class ReviewService {
      * @return owner
      */
     @PostMapping("/api/review")
-    public Review createOwner(@RequestBody Review review) {
+    public Review createReview(@RequestBody Review review) {
         return reviewRepository.save(review);
     }
 
@@ -45,6 +42,16 @@ public class ReviewService {
             return reviewRepository.save(review);
         } else
             return null;
+    }
+
+    @GetMapping("/api/review/{rId}/like")
+    public int getAllLikesForReview(@PathVariable("rId") int id){
+        Optional<Review> optionalReview = reviewRepository.findById(id);
+        if (optionalReview.isPresent()) {
+            Review review = optionalReview.get();
+            return review.getNumberOfLikes().size();
+        } else
+            return 0;
     }
 
     @DeleteMapping("api/review/{rId}")

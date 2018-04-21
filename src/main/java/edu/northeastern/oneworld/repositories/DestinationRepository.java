@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface DestinationRepository extends CrudRepository<Destination, Integer> {
 
     @Query("SELECT d FROM Destination d WHERE d.placeId=:placeId")
-    Optional<Destination> findDestinationById(@Param("placeId") String placeId);
+    Optional<Destination> findDestinationByPlaceId(@Param("placeId") String placeId);
 
     /**
      * Method to search Destination by name

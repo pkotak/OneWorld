@@ -1,14 +1,11 @@
 package edu.northeastern.oneworld.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.sql.Date;
+import java.util.List;
 
 
 /**
@@ -24,8 +21,10 @@ public class Review {
     @JsonIgnore
     private User user;
     private String description;
-    private Date dateOfReview;
-    private long numberOfLikes;
+    private String dateOfReview;
+    @OneToMany(mappedBy = "review")
+    @JsonIgnore
+    private List<UserLike> numberOfLikes;
     @ManyToOne
     @JsonIgnore
     private Destination destination;
@@ -36,7 +35,7 @@ public class Review {
     }
 
 
-    public Review(int id, User user, int rating, String description, Date dateOfReview, long numberOfLikes,
+    public Review(int id, User user, int rating, String description, String dateOfReview, List<UserLike> numberOfLikes,
                   Destination destination, DestinationType placeType) {
         super();
         this.id = id;
@@ -78,30 +77,34 @@ public class Review {
     }
 
 
-    public Date getDateOfReview() {
+    public String getDateOfReview() {
         return dateOfReview;
     }
 
 
-    public void setDateOfReview(Date dateOfReview) {
+    public void setDateOfReview(String dateOfReview) {
         this.dateOfReview = dateOfReview;
     }
 
 
-    public long getNumberOfLikes() {
+    public List<UserLike> getNumberOfLikes() {
         return numberOfLikes;
     }
 
 
-    public void setNumberOfLikes(long numberOfLikes) {
+    public void setNumberOfLikes(List<UserLike> numberOfLikes) {
         this.numberOfLikes = numberOfLikes;
     }
 
+    public void setLikeForReviews(UserLike userLike){
+        this.numberOfLikes.add(userLike);
+        if(userLike.getReview() != this)
+            userLike.setReview(this);
+    }
 
     public Destination getDestination() {
         return destination;
     }
-
 
     public void setDestination(Destination destination) {
         this.destination = destination;

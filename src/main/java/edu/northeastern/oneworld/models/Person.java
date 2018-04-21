@@ -27,7 +27,7 @@ public class Person implements Serializable {
 	private String email;
 	private String username;
 	private String password;
-	private Date dob;
+	private String dob;
 	private Boolean isAdmin;
 	private static final long serialVersionUID = 1L;
 
@@ -51,7 +51,7 @@ public class Person implements Serializable {
 	 * @param isAdmin
 	 */
 	public Person(int id, String firstName, String lastName, String phoneNumber, String address, String email,
-			String username, String password, Date dob, Boolean isAdmin) {
+			String username, String password, String dob, Boolean isAdmin) {
 		super();
 		this.id = id;
 		this.firstName = firstName;
@@ -137,11 +137,11 @@ public class Person implements Serializable {
 		this.password = password;
 	}
 
-	public Date getDob() {
+	public String getDob() {
 		return dob;
 	}
 
-	public void setDob(Date dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
 	}
 
