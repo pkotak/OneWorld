@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
+@CrossOrigin(origins = {"http://localhost:63342", "http://localhost:63343"})
 public class ReviewService {
 
     @Autowired

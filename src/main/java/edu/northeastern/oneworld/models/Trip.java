@@ -15,34 +15,31 @@ public class Trip {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    @ManyToOne()
+    @ManyToOne
     @JsonIgnore
     private User user;
-    private Integer tripDuration;
+    @ManyToOne
+    @JsonIgnore
+    private EventManager eventManager;
+    private String date;
     @ManyToMany(mappedBy = "trips", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Destination> destinations;
-//    @ManyToMany(mappedBy = "tripsInCountry", cascade = CascadeType.ALL)
-//    @JsonIgnore
-//    private List<Country> countries;
-//    @ManyToMany(mappedBy = "tripsInCity", cascade = CascadeType.ALL)
-//    private List<City> cities;
-//    @ManyToMany(mappedBy = "tripsInState", cascade = CascadeType.ALL)
-//    private List<State> states;
 
     public Trip() {
         super();
     }
 
-    public Trip(String name, User user, Integer tripDuration, List<Destination> destinations, List<Country> countries, List<City> cities, List<State> states) {
+    public Trip(String name, User user, EventManager eventManager, String date, List<Destination> destinations) {
         this.name = name;
         this.user = user;
-        this.tripDuration = tripDuration;
+        this.eventManager = eventManager;
+        this.date = date;
         this.destinations = destinations;
     }
 
     public void setTripDuration(Integer tripDuration) {
-        this.tripDuration = tripDuration;
+        this.date = date;
     }
 
     public List<Destination> getDestinations() {
@@ -69,14 +66,6 @@ public class Trip {
         this.user = user;
     }
 
-    public Integer getTripDuration() {
-        return tripDuration;
-    }
-
-    public void setTripDuration(int tripDuration) {
-        this.tripDuration = tripDuration;
-    }
-
     public String getName() {
         return name;
     }
@@ -85,11 +74,28 @@ public class Trip {
         this.name = name;
     }
 
+    public EventManager getEventManager() {
+        return eventManager;
+    }
+
+    public void setEventManager(EventManager eventManager) {
+        this.eventManager = eventManager;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
     public void set(Trip newTrip) {
         this.setDestinations(newTrip.getDestinations() != null ? newTrip.getDestinations() : this.getDestinations());
-        this.setTripDuration(newTrip.getTripDuration() != null ? newTrip.getTripDuration() : this.getTripDuration());
+        this.setDate(newTrip.getDate() != null ? newTrip.getDate() : this.getDate());
         this.setUser(newTrip.getUser() != null ? newTrip.getUser() : this.getUser());
         this.setName(newTrip.getName() != null ? newTrip.getName() : this.getName());
+        this.setEventManager(newTrip.getEventManager() != null ? newTrip.getEventManager() : this.getEventManager());
     }
 
     @Override
@@ -98,12 +104,9 @@ public class Trip {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", user=" + user +
-                ", tripDuration=" + tripDuration +
+                ", eventManager=" + eventManager +
+                ", date='" + date + '\'' +
                 ", destinations=" + destinations +
-                ", countries=" +
-                ", cities=" +
-                ", states=" +
                 '}';
     }
-
 }

@@ -29,6 +29,7 @@ $(document).ready(function() {
                 data:JSON.stringify(object),
                 success:function(response){
                     alert(response);
+                    //TODO : set type of user in cookie and username based on response
                     if(response == 2){
                         window.location.replace("../public/Profile/profile.html");
                         console.log('success 2');
