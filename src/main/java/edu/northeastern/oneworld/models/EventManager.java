@@ -20,7 +20,7 @@ public class EventManager extends Person implements Serializable{
     }
 
     public EventManager(String firstName, String lastName, String phoneNumber, String address, String email, String username, String password, String dob, Boolean isAdmin, List<Trip> trips) {
-        super(firstName, lastName, phoneNumber, address, email, username, password, dob, isAdmin);
+        super(firstName, lastName, phoneNumber, address, email, username, password, dob);
         this.trips = trips;
     }
 

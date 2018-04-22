@@ -50,11 +50,11 @@ public class UserService {
         String password = object.getString("password");
             int type = 0;
             switch (userRepository.getUserType(username)){
+                case "Admin":
+                    type = 3;
+                    break;
                 case "User":
-                    if(userRepository.isUserAdmin(username) == true)
-                            type =1;
-                    else
-                            type = 2;
+                    type = 2;
                     break;
                 case "Owner":
                     type = 3;

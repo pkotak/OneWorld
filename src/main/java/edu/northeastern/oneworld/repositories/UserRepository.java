@@ -31,14 +31,6 @@ public interface UserRepository extends CrudRepository<User, Integer>{
 	 * @param username
 	 * @return Person
 	 */
-	@Query("SELECT p.isAdmin FROM Person p WHERE p.username=:username")
-	boolean isUserAdmin(@Param("username") String username);
-
-	/**
-	 * Method to find user by credentials
-	 * @param username
-	 * @return Person
-	 */
 	@Query("SELECT p.class FROM Person p WHERE p.username=:username")
 	String getUserType(@Param("username") String username);
 }

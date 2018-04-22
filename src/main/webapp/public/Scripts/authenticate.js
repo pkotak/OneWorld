@@ -1,4 +1,3 @@
-
 $(document).ready(function() {
     $('#submit').click(function() {
 
@@ -70,27 +69,3 @@ $(document).ready(function() {
 
     });
 });
-
-
-// $(document).ready(function() {
-//     //$('#username').focus();
-//
-//     $('#submit').click(function() {
-//
-//         event.preventDefault(); // prevent PageReLoad
-//
-//         var ValidEmail = $('#username').val() === 'jay'; // User validate
-//         var ValidPassword = $('#password').val() === 'jay'; // Password validate
-//         console.log($('#username').val());
-//         console.log($('#password').val());
-//         if (ValidEmail === true && ValidPassword === true) { // if ValidEmail & ValidPassword
-//
-//             window.location = "../public/success.html"; // go to home.html
-//
-//         }
-//         else {
-//             window.location = "../public/error.html";
-//
-//         }
-//     });
-// });

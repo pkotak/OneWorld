@@ -13,7 +13,7 @@ $(document).ready(function(){
         var rpt_password = $('#txt_psw-repeat').val().trim();
 
         if( username != "" && password != "" && password === rpt_password){
-            var jsonObj = {firstName:fname,lastName:lname,phoneNumber: phone,
+            var jsonObj = {firstName:fname,lastName:lname,phoneNumber: phone, isAdmin:0,
                 address: address, email : email, username : username, password : password};
             $.ajax({
                 url:'http://localhost:8080/api/user/register',

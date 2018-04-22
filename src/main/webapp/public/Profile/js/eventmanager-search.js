@@ -15,7 +15,6 @@ function getAllDestinations() {
             for(var i = 0; i < response.length; i++){
                 table_body+='<tr>';
 
-
                 table_body +='<td>';
                 table_body +=i+1;
                 table_body +='</td>';

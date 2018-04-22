@@ -62,7 +62,7 @@ function getAllDestinations() {
 }
 
 
-function displayDataCard1() {
+function getAllUsers() {
 
     $.ajax({
         url:'http://localhost:8080/api/user                                                 ',
@@ -127,66 +127,3 @@ function displayDataCard1() {
     });
 }
 
-
-
-function getAllOwners() {
-
-    $.ajax({
-        url:'http://localhost:8080/api/owner',
-        type:'get',
-        success:function(response){
-            console.log(response[0].firstName);
-            console.log(response[0]);
-
-            var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>Phone Number</th><th>Address</th><th>Date Of Birth</th><th>Username</th><th></th></tr></thead><tbody>';
-
-            for(var i = 0; i < response.length; i++){
-                table_body+='<tr>';
-
-
-                table_body +='<td>';
-                table_body +=i+1;
-                table_body +='</td>';
-
-                table_body +='<td>';
-                table_body +=response[i].firstName + " " + response[i].lastName;
-                table_body +='</td>';
-
-                table_body +='<td>';
-                table_body +=response[i].phoneNumber;
-                table_body +='</td>';
-
-                table_body +='<td>';
-                table_body +=response[i].address;
-                table_body +='</td>';
-
-                table_body +='<td>';
-                table_body +=response[i].dob;
-                table_body +='</td>';
-
-                table_body +='<td>';
-                table_body +=response[i].username;
-                table_body +='</td>';
-
-                table_body +='<td>';
-                var buttonId = response[i].username;
-
-                table_body += "<div class='container'><button class='btn .btnView' id="+buttonId+" onclick='updateOwner(\""+response[i].username+"\");' data-toggle='modal' data-target='#id01'><b>Edit</b></button></div>";
-                table_body +='</td>';
-                table_body+='</tr>';
-            }
-            table_body+='</tbody></table>';
-            $("#tableDiv").html(table_body);
-        }
-    });
-
-    // for search function.................................. only............................
-    $("#search").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $("table tr").filter(function(index) {
-            if(index>0){
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            }
-        });
-    });
-}

@@ -25,7 +25,6 @@ public class Person implements Serializable {
 	private String username;
 	private String password;
 	private String dob;
-	private Boolean isAdmin;
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -38,16 +37,14 @@ public class Person implements Serializable {
 	/**
 	 * @param firstName
 	 * @param lastName
-	 * @param dType
 	 * @param phoneNumber
 	 * @param address
 	 * @param email
 	 * @param username
 	 * @param password
 	 * @param dob
-	 * @param isAdmin
 	 */
-	public Person(String firstName, String lastName, String phoneNumber, String address, String email, String username, String password, String dob, Boolean isAdmin) {
+	public Person(String firstName, String lastName, String phoneNumber, String address, String email, String username, String password, String dob) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
@@ -56,7 +53,6 @@ public class Person implements Serializable {
 		this.username = username;
 		this.password = password;
 		this.dob = dob;
-		this.isAdmin = isAdmin;
 	}
 
 
@@ -100,14 +96,6 @@ public class Person implements Serializable {
 		this.address = address;
 	}
 
-	public Boolean getIsAdmin() {
-		return isAdmin;
-	}
-
-	public void setIsAdmin(Boolean isAdmin) {
-		this.isAdmin = isAdmin;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -140,13 +128,6 @@ public class Person implements Serializable {
 		this.dob = dob;
 	}
 
-	public Boolean getAdmin() {
-		return isAdmin;
-	}
-
-	public void setAdmin(Boolean admin) {
-		isAdmin = admin;
-	}
 
 	@Override
 	public String toString() {
@@ -160,7 +141,6 @@ public class Person implements Serializable {
 				", username='" + username + '\'' +
 				", password='" + password + '\'' +
 				", dob='" + dob + '\'' +
-				", isAdmin=" + isAdmin +
 				'}';
 	}
 }

@@ -22,15 +22,13 @@ public class User extends Person implements Serializable {
 	@JoinTable(name = "UsersInTrips")
 	@JsonIgnore
 	private List<Trip> trips;
-	private Boolean isVerified;
 	private static final long serialVersionUID = 1L;
 
-	public User(List<UserLike> likes, List<Review> reviews, List<Trip> trips, Boolean isVerified) {
+	public User(List<UserLike> likes, List<Review> reviews, List<Trip> trips) {
 		super();
 		this.likes = likes;
 		this.reviews = reviews;
 		this.trips = trips;
-		this.isVerified = isVerified;
 	}
 
 	public User() {
@@ -51,14 +49,6 @@ public class User extends Person implements Serializable {
 
 	public void setReviews(List<Review> reviews) {
 		this.reviews = reviews;
-	}
-
-	public Boolean getIsVerified() {
-		return isVerified;
-	}
-
-	public void setIsVerified(Boolean isVerified) {
-		this.isVerified = isVerified;
 	}
 
 	public List<Trip> getTrips() {
@@ -82,18 +72,15 @@ public class User extends Person implements Serializable {
 		this.setLastName(newUser.getLastName() != null ? newUser.getLastName() : this.getLastName());
 		this.setDob(newUser.getDob() != null ? newUser.getDob() : this.getDob());
 		this.setEmail(newUser.getEmail() != null ? newUser.getEmail() : this.getEmail());
-		this.setIsAdmin(newUser.getIsAdmin() != null ? newUser.getIsAdmin() : this.getIsAdmin());
 		this.setAddress(newUser.getAddress() != null ? newUser.getAddress() : this.getAddress());
 		this.setPhoneNumber(newUser.getPhoneNumber() != null ? newUser.getPhoneNumber() : this.getPhoneNumber());
 		this.setTrips(newUser.getTrips() != null ? newUser.getTrips() : this.getTrips());
 		this.setLikes(newUser.getLikes() != null ? newUser.getLikes() : this.getLikes());
-		this.setIsVerified(newUser.getIsVerified() != null ? newUser.getIsVerified() : this.getIsVerified());
-
 	}
 
 	@Override
 	public String toString() {
-		return "User [likes=" + likes + ", reviews=" + reviews + ", trips=" + trips + ", isVerified=" + isVerified
+		return "User [likes=" + likes + ", reviews=" + reviews + ", trips=" + trips
 				+ "]";
 	}
 
