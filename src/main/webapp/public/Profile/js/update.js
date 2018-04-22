@@ -21,7 +21,8 @@ function update(index){
                     console.log(place);
                     if (place.reviews != undefined)
                         $("#card-num-reviews").text(place.reviews.length + " Reviews");
-                    $("#destinationImage").attr("src", place.photos[0].getUrl({'maxWidth' : 500, 'maxHeight' : 300}));
+                    if (place.photos != undefined || place.photos[0] != undefined)
+                        $("#destinationImage").attr("src", place.photos[0].getUrl({'maxWidth' : 500, 'maxHeight' : 300}));
                     var reviewFunction = "getAllReviews("+ JSON.stringify(place) + ");";
                     // console.log(reviewFunction);
                     $("#getAllReview").attr("onclick", reviewFunction);

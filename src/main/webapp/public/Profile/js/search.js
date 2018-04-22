@@ -5,9 +5,8 @@ $(document).ready(function() {
 });
 
 function displayDataCard2() {
-
     $.ajax({
-         url:'http://localhost:8080/api/destination                                                 ',
+        url:'http://localhost:8080/api/destination                                                 ',
         type:'get',
         success:function(response){
             var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>City</th><th>Country</th><th>Website</th><th></th></tr></thead><tbody>';
