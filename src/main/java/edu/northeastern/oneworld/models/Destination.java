@@ -218,6 +218,9 @@ public class Destination {
 
 	public void setOwner(Owner owner) {
 		this.owner = owner;
+		if(!owner.getDestinations().contains(this))
+			owner.getDestinations().add(this);
+		this.owner = owner;
 	}
 
 	@Override

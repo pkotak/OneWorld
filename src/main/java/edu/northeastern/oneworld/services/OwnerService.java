@@ -57,7 +57,7 @@ public class OwnerService {
 		Optional<Owner> optionalOwner = findUserById(id);
 		if(optionalOwner.isPresent()){
 			Owner owner = optionalOwner.get();
-			return owner.getDestination();
+			return owner.getDestinations();
 		}
 		return null;
 	}

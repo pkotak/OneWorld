@@ -41,7 +41,7 @@ function updateOwner(user) {
         data: {username: user},
         success: function (response) {
             userObj = response[0];
-            $("#txt_fname").attr("placeholder", userObj.firstName);
+            $("#txt_fname").attr("value", userObj.firstName);
             // $("#getAllReview").attr("onclick", reviewFunction);
             $("#txt_lname").attr("value", userObj.lastName);
             $("#txt_phone").attr("value", userObj.phoneNumber);

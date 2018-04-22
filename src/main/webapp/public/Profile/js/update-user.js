@@ -41,7 +41,7 @@ function updateUser(user) {
         data: {username: user},
         success: function (response) {
             userObj = response[0];
-            $("#txt_fname").attr("placeholder", userObj.firstName);
+            $("#txt_fname").attr("value", userObj.firstName);
             $("#txt_lname").attr("value", userObj.lastName);
             $("#txt_phone").attr("value", userObj.phoneNumber);
             $("#txt_address").attr("value", userObj.address);
