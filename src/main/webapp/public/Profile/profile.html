@@ -1,12 +1,16 @@
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
 
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCecXasuZCys5afeG5HLBhbqSG4ndWiWf8&libraries=places" async defer></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="js/profile.js"></script>
 	<script src="js/search.js"></script>
 	<script src="js/update.js"></script>
+	<script src="js/reviews.js"></script>
 	<link href="css/profile.css" rel="stylesheet">
 	<style>
 		img {
@@ -301,23 +305,23 @@
 						<img id="destinationImage" style="height: 30%; width: 100%;"
 							 class="img-responsive">
 					</div>
-					<div class="col-md-6 product_content">
-						<h4>Product Id: <span>51526000</span></h4>
-						<div class="rating">
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star"></span>
-							<span class="glyphicon glyphicon-star"></span>
-							(10 reviews)
-						</div>
-						<p id ="destinationText">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+					<p class="col-md-6 product_content card-content">
+						<p id="card-rating"></p>
+						<p id="card-num-reviews"></p>
+						<p id="card-timings"></p>
+						<p id="card-price-range"></p>
 
 					</div>
 				</div>
+			<div class="row card-content">
+				<div><p id="card-address"></p></div>
+				<div><p id ="destinationText"></p></div>
+			</div>
 				<div class="row">
-					<button type="button" class="btn btn-primary" id="destinationLike"><b>Like</b></button>
-				</div>
+					<div class="container">
+					<button type="button" class="btn" name="" id="getAllReview" onclick=""><b>Reviews</b></button>
+					</div>
+					</div>
 			</div>
 		</div>
 	</div>
