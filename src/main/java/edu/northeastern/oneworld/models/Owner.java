@@ -1,11 +1,12 @@
 package edu.northeastern.oneworld.models;
 
-import java.io.Serializable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import sun.security.krb5.internal.crypto.Des;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.*;
 
 /**
  * Owner Representation
@@ -14,51 +15,32 @@ import javax.persistence.Id;
 @Entity
 public class Owner extends Person implements Serializable{
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
-	private String placeId;
-	private String placeType;
+	@OneToMany(mappedBy = "owner")
+	@JsonIgnore
+	private List<Destination> destination;
 	private static final long serialVersionUID = 1L;
 
 	public Owner() {
 		super();
 	}
 
-	public Owner(int id, String placeId, String placeType) {
-		super();
-		this.id = id;
-		this.placeId = placeId;
-		this.placeType = placeType;
+	public Owner(String firstName, String lastName, String phoneNumber, String address, String email, String username, String password, String dob, Boolean isAdmin, List<Destination> destination) {
+		super(firstName, lastName, phoneNumber, address, email, username, password, dob, isAdmin);
+		this.destination = destination;
 	}
 
-	public int getId() {
-		return id;
+	public List<Destination> getDestination() {
+		return destination;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public String getPlaceId() {
-		return placeId;
-	}
-
-	public void setPlaceId(String placeId) {
-		this.placeId = placeId;
-	}
-
-	public String getPlaceType() {
-		return placeType;
-	}
-
-	public void setPlaceType(String placeType) {
-		this.placeType = placeType;
+	public void setDestination(List<Destination> destination) {
+		this.destination = destination;
 	}
 
 	@Override
 	public String toString() {
-		return "Owner [id=" + id + ", placeId=" + placeId + ", placeType=" + placeType + "]";
+		return "Owner{" +
+				"destination=" + destination +
+				'}';
 	}
-
 }

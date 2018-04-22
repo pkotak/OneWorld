@@ -1,5 +1,6 @@
 package edu.northeastern.oneworld.services;
 
+import com.google.gson.Gson;
 import edu.northeastern.oneworld.models.*;
 import edu.northeastern.oneworld.repositories.DestinationRepository;
 import edu.northeastern.oneworld.repositories.ReviewRepository;
@@ -21,11 +22,13 @@ public class ReviewService {
 
     /**
      * Method to create a new review
-     * @param review review object
+     * @param json review object
      * @return owner
      */
     @PostMapping("/api/review")
-    public Review createReview(@RequestBody Review review) {
+    public Review createReview(@RequestBody String json) {
+        Gson gson = new Gson();
+        Review review = gson.fromJson(json, Review.class);
         return reviewRepository.save(review);
     }
 

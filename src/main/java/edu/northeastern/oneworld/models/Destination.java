@@ -16,6 +16,9 @@ public class Destination {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JsonIgnore
+	private Owner owner;
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "DestinationsInTrips")
 	@JsonIgnore
@@ -38,7 +41,8 @@ public class Destination {
 	private String country;
 	private String destinationType;
 
-	public Destination(List<Trip> trips, List<Review> reviews, String placeId, int priceRange, double rating, int phoneNumber, String address, String photoReference, String name, String timings, String websiteLink, double latitude, double longitude, String city, String country, String destinationType) {
+	public Destination(Owner owner, List<Trip> trips, List<Review> reviews, String placeId, int priceRange, double rating, int phoneNumber, String address, String photoReference, String name, String timings, String websiteLink, double latitude, double longitude, String city, String country, String destinationType) {
+		this.owner = owner;
 		this.trips = trips;
 		this.reviews = reviews;
 		this.placeId = placeId;
@@ -208,10 +212,19 @@ public class Destination {
 		this.placeId = placeId;
 	}
 
+	public Owner getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Owner owner) {
+		this.owner = owner;
+	}
+
 	@Override
 	public String toString() {
 		return "Destination{" +
 				"id=" + id +
+				", owner=" + owner +
 				", trips=" + trips +
 				", reviews=" + reviews +
 				", placeId='" + placeId + '\'' +

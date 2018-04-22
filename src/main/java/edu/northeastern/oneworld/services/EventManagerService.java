@@ -1,5 +1,6 @@
 package edu.northeastern.oneworld.services;
 
+import com.google.gson.Gson;
 import edu.northeastern.oneworld.models.EventManager;
 import edu.northeastern.oneworld.models.Trip;
 import edu.northeastern.oneworld.repositories.EventManagerRepository;
@@ -21,11 +22,13 @@ public class EventManagerService {
 
     /**
      * Method to create a new event manager
-     * @param eventManager event manager object
+     * @param json event manager object
      * @return event manager
      */
     @PostMapping("/api/eventmanager")
-    public EventManager createOwner(@RequestBody EventManager eventManager) {
+    public EventManager createEventManager(@RequestBody String json) {
+        Gson g = new Gson();
+        EventManager eventManager = g.fromJson(json, EventManager.class);
         return eventManagerRepository.save(eventManager);
     }
 
@@ -50,6 +53,21 @@ public class EventManagerService {
         if(optionalTrip.isPresent()){
             Trip trip = optionalTrip.get();
             return trip.getEventManager();
+        }
+        return null;
+    }
+
+    /**
+     * Method to find an event manager for a trip
+     * @param id trip id
+     * @return event manager
+     */
+    @GetMapping("/api/eventmanager/{eid}/trip")
+    public Iterable<Trip> findTripsForEventManager(@PathVariable("eid") int id) {
+        Optional<EventManager> optionalEventManager = eventManagerRepository.findById(id);
+        if(optionalEventManager.isPresent()){
+            EventManager eventManager = optionalEventManager.get();
+            return eventManager.getTrips();
         }
         return null;
     }

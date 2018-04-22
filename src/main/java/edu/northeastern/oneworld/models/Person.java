@@ -3,18 +3,15 @@ package edu.northeastern.oneworld.models;
 import java.io.Serializable;
 import java.sql.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
+import javax.persistence.*;
+
 /**
  * Person Representation
  *
  */
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn
 public class Person implements Serializable {
 
 	@Id
@@ -39,9 +36,9 @@ public class Person implements Serializable {
 	}
 
 	/**
-	 * @param id
 	 * @param firstName
 	 * @param lastName
+	 * @param dType
 	 * @param phoneNumber
 	 * @param address
 	 * @param email
@@ -50,10 +47,7 @@ public class Person implements Serializable {
 	 * @param dob
 	 * @param isAdmin
 	 */
-	public Person(int id, String firstName, String lastName, String phoneNumber, String address, String email,
-			String username, String password, String dob, Boolean isAdmin) {
-		super();
-		this.id = id;
+	public Person(String firstName, String lastName, String phoneNumber, String address, String email, String username, String password, String dob, Boolean isAdmin) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
@@ -64,6 +58,7 @@ public class Person implements Serializable {
 		this.dob = dob;
 		this.isAdmin = isAdmin;
 	}
+
 
 	public int getId() {
 		return id;
@@ -145,11 +140,27 @@ public class Person implements Serializable {
 		this.dob = dob;
 	}
 
-	@Override
-	public String toString() {
-		return "Person [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", phoneNumber="
-				+ phoneNumber + ", address=" + address + ", email=" + email + ", username=" + username + ", password="
-				+ password + ", dob=" + dob + ", isAdmin=" + isAdmin + "]";
+	public Boolean getAdmin() {
+		return isAdmin;
 	}
 
+	public void setAdmin(Boolean admin) {
+		isAdmin = admin;
+	}
+
+	@Override
+	public String toString() {
+		return "Person{" +
+				"id=" + id +
+				", firstName='" + firstName + '\'' +
+				", lastName='" + lastName + '\'' +
+				", phoneNumber='" + phoneNumber + '\'' +
+				", address='" + address + '\'' +
+				", email='" + email + '\'' +
+				", username='" + username + '\'' +
+				", password='" + password + '\'' +
+				", dob='" + dob + '\'' +
+				", isAdmin=" + isAdmin +
+				'}';
+	}
 }

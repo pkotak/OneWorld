@@ -1,7 +1,6 @@
 
 $(document).ready(function() {
     $('#submit').click(function() {
-        Cookies.set('name', "");
 
         event.preventDefault(); // prevent PageReLoad
 
@@ -34,7 +33,7 @@ $(document).ready(function() {
                         $.cookie("name", username);
                         $.cookie("type", response);
 
-                        window.location.href = "../public/Profile/profile.html";
+                        window.location.href = "../public/Profile/user-profile.html";
                         console.log('success 2');
                     }else{
                         msg = "Invalid username and password!";

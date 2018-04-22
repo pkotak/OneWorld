@@ -1,10 +1,11 @@
 package edu.northeastern.oneworld.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.List;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 
 /**
  * User Representation
@@ -17,7 +18,9 @@ public class User extends Person implements Serializable {
 	private List<UserLike> likes;
 	@OneToMany(mappedBy = "user")
 	private List<Review> reviews;
-	@OneToMany(mappedBy = "user")
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "UsersInTrips")
+	@JsonIgnore
 	private List<Trip> trips;
 	private Boolean isVerified;
 	private static final long serialVersionUID = 1L;
@@ -64,6 +67,12 @@ public class User extends Person implements Serializable {
 
 	public void setTrips(List<Trip> trips) {
 		this.trips = trips;
+	}
+
+	public void addToTrip(Trip trip){
+		this.trips.add(trip);
+		if(! trip.getUser().contains(this))
+			trip.getUser().add(this);
 	}
 
 	public void set(User newUser) {

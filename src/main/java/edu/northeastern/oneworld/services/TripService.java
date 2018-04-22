@@ -21,7 +21,7 @@ public class TripService {
     public Trip createTrip(@RequestBody String json){
         Gson g = new Gson();
         Trip trip = g.fromJson(json, Trip.class);
-        return trip;
+        return tripRepository.save(trip);
     }
 
     @GetMapping("/api/trip")

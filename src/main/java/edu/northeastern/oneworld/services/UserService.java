@@ -27,11 +27,13 @@ public class UserService {
     /**
      * Method to create a new user
      *
-     * @param user user object
+     * @param json user object
      * @return user
      */
     @PostMapping("/api/user/register")
-    public User createUser(@RequestBody User user) {
+    public User createUser(@RequestBody String json) {
+        Gson gson = new Gson();
+        User user = gson.fromJson(json, User.class);
         return userRepository.save(user);
     }
 
@@ -46,14 +48,25 @@ public class UserService {
         JSONObject object = new JSONObject(json);
         String username = object.getString("username");
         String password = object.getString("password");
-        if (userRepository.findUserByCredentials(username, password).iterator().hasNext() == true){
-            if(userRepository.isUserAdmin(username)){
-                return 1;
+            int type = 0;
+            switch (userRepository.getUserType(username)){
+                case "User":
+                    if(userRepository.isUserAdmin(username) == true)
+                            type =1;
+                    else
+                            type = 2;
+                    break;
+                case "Owner":
+                    type = 3;
+                    break;
+                case "EventManager":
+                    type = 4;
+                    break;
+                default:
+                    type = 0;
             }
-                return 2;
-        }
-        else
-            return 0;
+        System.out.println("Type is "+ type);
+            return type;
     }
     /**
      * Method to find all people
@@ -135,6 +148,24 @@ public class UserService {
     @DeleteMapping("/api/user/review/like/{lId}")
     public void unlikeReview(@PathVariable("lId") int id){
         userLikeRepository.deleteById(id);
+    }
+
+    /**
+     * Add a User to a trip
+     * @param uId User id
+     * @param tripId Trip id
+     */
+    @PostMapping("/api/user/{uId}/trip/{tripId}")
+    public void addUserToTrip(@PathVariable("uId") int uId,
+                                     @PathVariable("tripId") int tripId){
+        Optional<Trip> optionalTrip = tripRepository.findById(tripId);
+        Optional<User> optionalUser = userRepository.findById(uId);
+        if (optionalTrip.isPresent() && optionalUser.isPresent()){
+            Trip t = optionalTrip.get();
+            User u = optionalUser.get();
+            u.addToTrip(t);
+            userRepository.save(u);
+        }
     }
 
 }

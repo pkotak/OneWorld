@@ -11,13 +11,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  */
 @Entity
 public class Trip {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    @ManyToOne
+    @ManyToMany(mappedBy = "trips")
     @JsonIgnore
-    private User user;
+    private List<User> users;
     @ManyToOne
     @JsonIgnore
     private EventManager eventManager;
@@ -30,9 +31,9 @@ public class Trip {
         super();
     }
 
-    public Trip(String name, User user, EventManager eventManager, String date, List<Destination> destinations) {
+    public Trip(String name, List<User> users, EventManager eventManager, String date, List<Destination> destinations) {
         this.name = name;
-        this.user = user;
+        this.users = users;
         this.eventManager = eventManager;
         this.date = date;
         this.destinations = destinations;
@@ -58,12 +59,12 @@ public class Trip {
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public List<User> getUser() {
+        return users;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUser(List<User> user) {
+        this.users = user;
     }
 
     public String getName() {
@@ -80,6 +81,8 @@ public class Trip {
 
     public void setEventManager(EventManager eventManager) {
         this.eventManager = eventManager;
+        if(!eventManager.getTrips().contains(this))
+            eventManager.getTrips().add(this);
     }
 
     public String getDate() {
@@ -103,7 +106,7 @@ public class Trip {
         return "Trip{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", user=" + user +
+                ", user=" + users +
                 ", eventManager=" + eventManager +
                 ", date='" + date + '\'' +
                 ", destinations=" + destinations +
