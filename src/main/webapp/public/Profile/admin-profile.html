@@ -1,4 +1,4 @@
-<html xmlns="http://www.w3.org/1999/html">
+<html>
 <head>
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -7,12 +7,18 @@
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.1.min.js"><\/script>')</script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCecXasuZCys5afeG5HLBhbqSG4ndWiWf8&libraries=places" async defer></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="Profile/js/profile.js"></script>
-    <script src="Profile/js/admin-search.js"></script>
-    <script src="Profile/js/update.js"></script>
-    <script src="Profile/js/reviews.js"></script>
-    <link href="Profile/css/profile.css" rel="stylesheet">
+    <script src="js/profile.js"></script>
+    <script src="js/admin-search.js"></script>
+    <script src="js/update.js"></script>
+    <script src="js/reviews.js"></script>
+    <script src="js/likes.js"></script>
+    <link href="css/admin-profile.css" rel="stylesheet">
+    <script src="js/jquery.cookie.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+    <script src="../Scripts/authenticate.js"></script>
+    <script src="js/update-user.js"></script>
     <meta charset="utf-8"/>
+    <link rel="stylesheet" href="css/home.css">
     <style>
         img {
             width: 40px;
@@ -20,6 +26,13 @@
         }
 
     </style>
+    <script>
+        // Get the modal
+        function pageReload(){
+            location.reload();
+        }
+
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top topbar">
@@ -100,7 +113,7 @@
                                     </div>
                                     <div class="back">
                                         <div class="container">
-                                            <button class="btn" id="dataButton" onclick="displayDataCard1()"><b>Get Destinations</b></button>
+                                            <button class="btn" id="dataButton" onclick="displayDataCard1()"><b>Get Users</b></button>
                                         </div>
                                     </div>
                                 </div>
@@ -142,7 +155,7 @@
                                     </div>
                                     <div class="back">
                                         <div class="container">
-                                            <button class="btn" id="dataButton3" onclick="displayDataCard2()"><b>Get Destinations</b></button>
+                                            <button class="btn" id="dataButton3" onclick="displayDataCard2()"><b>Get Owners</b></button>
                                         </div>
                                     </div>
                                 </div>
@@ -162,7 +175,7 @@
                                     </div>
                                     <div class="back">
                                         <div class="container">
-                                            <button class="btn" id="dataButton4" onclick="displayDataCard2()"><b>Get Destinations</b></button>
+                                            <button class="btn" id="dataButton4" onclick="displayDataCard2()"><b>Get My Reviews</b></button>
                                         </div>
                                     </div>
                                 </div>
@@ -293,6 +306,7 @@
         </section>
     </section>
 </article>
+
 <div class="modal fade product_view" id="product_view">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -326,6 +340,50 @@
         </div>
     </div>
 </div>
+
+</div>
+
+
+<div id="id01" class="modal fade product_view">
+    <span onclick="document.getElementById('id01').style.display='none'" class="close"
+          title="Close Modal">&times;</span>
+    <form class="modal-content animate">
+        <div class="container">
+            <h1>Edit Details</h1><hr>
+
+            <b>First Name</b>
+            <input type="text" placeholder="" name="firstname" id="txt_fname" vrequired>
+
+            <b>Last Name</b>
+            <input type="text" placeholder="" name="lname" id="txt_lname" required>
+
+            <b>Phone Number</b>
+            <input type="text" placeholder="" name="phone" id="txt_phone">
+
+            <b>Address</b>
+            <input type="text" placeholder="" name="address" id="txt_address">
+
+            <b>Email</b>
+            <input type="text" placeholder="" name="email" id="txt_email" required>
+
+            <b>Username</b>
+            <input type="text" placeholder="" name="username" id="txt_uname" required>
+
+            <div class="container clearfix">
+                <div class = "row">
+                    <div class="col-xs-6">
+                    <button type="button" onclick="pageReload();" class="btn cancelbtn">
+                        Cancel
+                    </button>
+                </div>
+                    <div class="col-xs-6">
+                    <button type="submit" id="btn_signup" class="btn signupbtn">Save Details</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </form>
 </div>
 </body>
 </html>
