@@ -46,7 +46,7 @@ public class UserService {
         JSONObject object = new JSONObject(json);
         String username = object.getString("username");
         String password = object.getString("password");
-        if (userRepository.findUserByCredentials(username, password) != null){
+        if (userRepository.findUserByCredentials(username, password).iterator().hasNext() == true){
             if(userRepository.isUserAdmin(username)){
                 return 1;
             }
