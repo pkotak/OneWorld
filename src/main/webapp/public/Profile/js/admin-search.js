@@ -2,6 +2,7 @@ $(document).ready(function() {
     $('#button-id').click(function() {
       foo($('#formValueId').val());
     });
+    displayDataCard2();
 });
 
 function displayDataCard2() {
