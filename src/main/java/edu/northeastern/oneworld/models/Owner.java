@@ -26,7 +26,7 @@ public class Owner extends Person implements Serializable{
 
 	public Owner(String firstName, String lastName, String phoneNumber, String address, String email, String username, String password, String dob, Boolean isAdmin, List<Destination> destination) {
 		super(firstName, lastName, phoneNumber, address, email, username, password, dob);
-		this.destinations = destination;
+		this.destinations = destinations;
 	}
 
 	public List<Destination> getDestinations() {

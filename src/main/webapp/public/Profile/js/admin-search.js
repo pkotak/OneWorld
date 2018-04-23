@@ -43,7 +43,7 @@ function displayDataCard2() {
 
                 var buttonId = "updateButton" + i;
 
-                table_body += "<div class='container'><button class='btn .btnView' id="+buttonId+" onclick='update("+i+");' data-toggle='modal' data-target='#product_view'><b>View</b></button></div>";
+                table_body += "<div class='container'><button class='btn .btnView' id="+buttonId+" onclick='updateUser("+i+");' data-toggle='modal' data-target='#product_view'><b>View</b></button></div>";
                 table_body +='</td>';
                 table_body+='</tr>';
             }
@@ -200,13 +200,13 @@ function displayDataCard1() {
 function displayDataCard3() {
 
     $.ajax({
-        url:'http://localhost:8080/api/user                                                 ',
+        url:'http://localhost:8080/api/owner                                                 ',
         type:'get',
         success:function(response){
             console.log(response[0].firstName);
             console.log(response[0]);
 
-            var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>Phone Number</th><th>Address</th><th>Date Of Birth</th><th>Username</th><th></th><th></th></tr></thead><tbody>';
+            var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>Phone Number</th><th>Address</th><th>Date Of Birth</th><th>Username</th><th></th></tr></thead><tbody>';
 
             for(var i = 0; i < response.length; i++){
                 table_body+='<tr>';
@@ -236,14 +236,6 @@ function displayDataCard3() {
                 table_body +=response[i].username;
                 table_body +='</td>';
 
-
-
-
-                table_body +='<td>';
-                var buttonId = response[i].username;
-
-                table_body += "<div class='container'><button class='btn .btnView' id="+buttonId+" onclick='updateUser(\""+response[i].username+"\");' data-toggle='modal' data-target='#id01'><b>Edit</b></button></div>";
-                table_body +='</td>';
 
 
                 table_body +='<td>';
@@ -272,13 +264,13 @@ function displayDataCard3() {
 function displayDataCard4() {
 
     $.ajax({
-        url:'http://localhost:8080/api/user                                                 ',
+        url:'http://localhost:8080/api/eventmanager                                                 ',
         type:'get',
         success:function(response){
             console.log(response[0].firstName);
             console.log(response[0]);
 
-            var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>Phone Number</th><th>Address</th><th>Date Of Birth</th><th>Username</th><th></th><th></th></tr></thead><tbody>';
+            var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>Phone Number</th><th>Address</th><th>Date Of Birth</th><th>Username</th><th></th></tr></thead><tbody>';
 
             for(var i = 0; i < response.length; i++){
                 table_body+='<tr>';
@@ -310,17 +302,9 @@ function displayDataCard4() {
 
 
 
-
-                table_body +='<td>';
-                var buttonId = response[i].username;
-
-                table_body += "<div class='container'><button class='btn .btnView' id="+buttonId+" onclick='updateUser(\""+response[i].username+"\");' data-toggle='modal' data-target='#id01'><b>Edit</b></button></div>";
-                table_body +='</td>';
-
-
                 table_body +='<td>';
 
-                table_body += "<div class='container'><button class='btn .btnView' onclick='deleteUser(\""+response[i].username+"\");'><b>Delete</b></button></div>";
+                table_body += "<div class='container'><button class='btn .btnView' onclick='deleteManager(\""+response[i].username+"\");'><b>Delete</b></button></div>";
                 table_body +='</td>';
 
                 table_body+='</tr>';

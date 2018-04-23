@@ -69,21 +69,12 @@ public class UserService {
             return type;
     }
     /**
-     * Method to find all people
-     *
-     * @param username
-     * @param password
+     * Method to find all users
      * @return
      */
     @GetMapping("/api/user")
-    public Iterable<User> findAllPeople(@RequestParam(name = "username", required = false) String username,
-                                        @RequestParam(name = "password", required = false) String password) {
-        if (username != null && password != null)
-            return userRepository.findUserByCredentials(username, password);
-        else if (username != null)
-            return userRepository.findUserByUsername(username);
-        else
-            return userRepository.findAll();
+    public Iterable<User> findAllUsers(){
+        return userRepository.getUsers();
     }
 
     /**

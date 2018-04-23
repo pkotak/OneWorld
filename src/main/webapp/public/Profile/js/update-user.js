@@ -48,4 +48,28 @@ function updateUser(user) {
             $("#txt_email").attr("value", userObj.email);
             $("#txt_uname").attr("value", userObj.username);
         }
-    });}
+    });
+}
+
+
+function updateOwner(user) {
+
+    var url = 'http://localhost:8080/api/owner/';
+    var userObj;
+    $.ajax({
+        url: url,
+        type: 'get',
+        data: {username: user},
+        success: function (response) {
+            userObj = response[0];
+            $("#txt_fname").attr("value", userObj.firstName);
+            $("#txt_lname").attr("value", userObj.lastName);
+            $("#txt_phone").attr("value", userObj.phoneNumber);
+            $("#txt_address").attr("value", userObj.address);
+            $("#txt_email").attr("value", userObj.email);
+            $("#txt_uname").attr("value", userObj.username);
+        }
+    });
+}
+
+

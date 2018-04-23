@@ -31,20 +31,12 @@ public class OwnerService {
 	}
 
 	/**
-	 * Method to find all people 
-	 * @param username
-	 * @param password
+	 * Method to find all Owners
 	 * @return
 	 */
 	@GetMapping("/api/owner")
-	public Iterable<Owner> findAllPeople(@RequestParam(name = "username", required = false) String username,
-			@RequestParam(name = "password", required = false) String password) {
-		if (username != null && password != null)
-			return ownerRepository.findUserByCredentials(username, password);
-		else if (username != null)
-			return ownerRepository.findUserByUsername(username);
-		else
-			return ownerRepository.findAll();
+	public Iterable<Owner> findAllOwners(){
+		return ownerRepository.getOwners();
 	}
 
 	@GetMapping("/api/owner/{ownerId}")

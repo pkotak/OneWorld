@@ -42,6 +42,11 @@ public class EventManagerService {
         return eventManagerRepository.findById(id);
     }
 
+    @GetMapping("/api/eventmanager")
+    public Iterable<EventManager> getEventManagers(){
+        return eventManagerRepository.getEventManagers();
+    }
+
     /**
      * Method to find an event manager for a trip
      * @param id trip id

@@ -28,6 +28,13 @@ public class TripService {
         return tripRepository.findAll();
     }
 
+
+    @GetMapping("/api/trip/{tid}")
+    public Optional<Trip> findAllTrips(@PathVariable("tid") int id){
+        return tripRepository.findById(id);
+    }
+
+
     @GetMapping("/api/trip/{tripId}/destination")
     public Destination findDestinationsInTrip(@PathVariable("tripId") int id){
         Optional<Trip> optionalTrip = tripRepository.findById(id);
