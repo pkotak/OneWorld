@@ -40,18 +40,18 @@ public class DestinationService {
         return destinationRepository.findAll();
     }
 
-    @PostMapping("/api/destination/{dId}/trip/{tripId}")
-    public void addDestinationToTrip(@PathVariable("dId") int dId,
-                                     @PathVariable("tripId") int tripId){
-        Optional<Trip> optionalTrip = tripRepository.findById(tripId);
-        Optional<Destination> optionalDestination = destinationRepository.findById(dId);
-        if (optionalTrip.isPresent() && optionalDestination.isPresent()){
-            Trip t = optionalTrip.get();
-            Destination d = optionalDestination.get();
-            d.addToTrip(t);
-            destinationRepository.save(d);
-        }
-    }
+//    @PostMapping("/api/destination/{dId}/trip/{tripId}")
+//    public void addDestinationToTrip(@PathVariable("dId") int dId,
+//                                     @PathVariable("tripId") int tripId){
+//        Optional<Trip> optionalTrip = tripRepository.findById(tripId);
+//        Optional<Destination> optionalDestination = destinationRepository.findById(dId);
+//        if (optionalTrip.isPresent() && optionalDestination.isPresent()){
+//            Trip t = optionalTrip.get();
+//            Destination d = optionalDestination.get();
+//            d.addToTrip(t);
+//            destinationRepository.save(d);
+//        }
+//    }
 
     @GetMapping("/api/destination/{dId}")
     public Optional<Destination> findDestinationById(@PathVariable("dId") int id){

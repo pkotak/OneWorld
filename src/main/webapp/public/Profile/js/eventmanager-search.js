@@ -127,7 +127,9 @@ function displayDataCard1() {
     });
 }
 
-
+function addDestinationToTrip() {
+    
+}
 
 function getAllOwners() {
 

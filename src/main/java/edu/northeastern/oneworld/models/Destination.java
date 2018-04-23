@@ -19,8 +19,7 @@ public class Destination {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Owner owner;
-	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "DestinationsInTrips")
+	@OneToMany(mappedBy = "destination")
 	@JsonIgnore
 	private List<Trip> trips;
 	@OneToMany(mappedBy = "destination")
@@ -195,11 +194,6 @@ public class Destination {
 		return trips;
 	}
 
-	public void addToTrip(Trip trip){
-		this.trips.add(trip);
-		if(! trip.getDestinations().contains(this))
-			trip.getDestinations().add(this);
-	}
 	public void setTrips(List<Trip> trips) {
 		this.trips = trips;
 	}

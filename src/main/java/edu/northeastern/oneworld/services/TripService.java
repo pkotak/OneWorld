@@ -29,11 +29,11 @@ public class TripService {
     }
 
     @GetMapping("/api/trip/{tripId}/destination")
-    public Iterable<Destination> findDestinationsInTrip(@PathVariable("tripId") int id){
+    public Destination findDestinationsInTrip(@PathVariable("tripId") int id){
         Optional<Trip> optionalTrip = tripRepository.findById(id);
         if (optionalTrip.isPresent()) {
             Trip trip = optionalTrip.get();
-            return trip.getDestinations();
+            return trip.getDestination();
         }
         return null;
     }

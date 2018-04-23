@@ -23,32 +23,32 @@ public class Trip {
     @JsonIgnore
     private EventManager eventManager;
     private String date;
-    @ManyToMany(mappedBy = "trips", cascade = CascadeType.ALL)
+    @ManyToOne
     @JsonIgnore
-    private List<Destination> destinations;
+    private Destination destination;
 
     public Trip() {
         super();
     }
 
-    public Trip(String name, List<User> users, EventManager eventManager, String date, List<Destination> destinations) {
+    public Trip(String name, List<User> users, EventManager eventManager, String date, Destination destination) {
         this.name = name;
         this.users = users;
         this.eventManager = eventManager;
         this.date = date;
-        this.destinations = destinations;
+        this.destination = destination;
     }
 
     public void setTripDuration(Integer tripDuration) {
         this.date = date;
     }
 
-    public List<Destination> getDestinations() {
-        return destinations;
+    public Destination getDestination() {
+        return destination;
     }
 
-    public void setDestinations(List<Destination> destinations) {
-        this.destinations = destinations;
+    public void setDestination(Destination destination) {
+        this.destination = destination;
     }
 
     public int getId() {
@@ -94,7 +94,7 @@ public class Trip {
     }
 
     public void set(Trip newTrip) {
-        this.setDestinations(newTrip.getDestinations() != null ? newTrip.getDestinations() : this.getDestinations());
+        this.setDestination(newTrip.getDestination() != null ? newTrip.getDestination() : this.getDestination());
         this.setDate(newTrip.getDate() != null ? newTrip.getDate() : this.getDate());
         this.setUser(newTrip.getUser() != null ? newTrip.getUser() : this.getUser());
         this.setName(newTrip.getName() != null ? newTrip.getName() : this.getName());
@@ -109,7 +109,7 @@ public class Trip {
                 ", user=" + users +
                 ", eventManager=" + eventManager +
                 ", date='" + date + '\'' +
-                ", destinations=" + destinations +
+                ", destinations=" + destination +
                 '}';
     }
 }
