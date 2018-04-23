@@ -7,7 +7,7 @@ import java.util.List;
 @Entity
 public class EventManager extends Person implements Serializable{
 
-    @OneToMany(mappedBy = "eventManager")
+    @OneToMany(mappedBy = "eventManager", cascade = CascadeType.ALL)
     private List<Trip> trips;
     private static final long serialVersionUID = 1L;
 

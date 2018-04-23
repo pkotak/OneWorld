@@ -19,10 +19,10 @@ public class Destination {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JsonIgnore
 	private Owner owner;
-	@OneToMany(mappedBy = "destination")
+	@OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Trip> trips;
-	@OneToMany(mappedBy = "destination")
+	@OneToMany(mappedBy = "destination", cascade = CascadeType.ALL)
 	@JsonIgnore
 	private List<Review> reviews;
 	private String placeId;

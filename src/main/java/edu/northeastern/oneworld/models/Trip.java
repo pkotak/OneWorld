@@ -15,7 +15,7 @@ public class Trip {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @ManyToMany(mappedBy = "trips")
+    @ManyToMany(mappedBy = "trips", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<User> users;
     @ManyToOne

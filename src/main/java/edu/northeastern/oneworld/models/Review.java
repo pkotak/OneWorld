@@ -22,7 +22,7 @@ public class Review {
     private User user;
     private String description;
     private String dateOfReview;
-    @OneToMany(mappedBy = "review")
+    @OneToMany(mappedBy = "review", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<UserLike> numberOfLikes;
     @ManyToOne
