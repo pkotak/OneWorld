@@ -87,7 +87,6 @@ public class EventManagerService {
         Optional<EventManager> optionalEventManager = eventManagerRepository.findById(id);
         if (optionalEventManager.isPresent()) {
             EventManager eventManager = optionalEventManager.get();
-//			owner.set(newowner);
             return eventManagerRepository.save(eventManager);
         } else
             return null;

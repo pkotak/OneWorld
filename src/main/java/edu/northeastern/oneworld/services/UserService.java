@@ -159,4 +159,13 @@ public class UserService {
         }
     }
 
+    @GetMapping("/api/user/{uId}/trip")
+    public Iterable<Trip> getAllTripsForUser(@PathVariable("uId") int id){
+        Optional<User> optionalUser = findUserById(id);
+        if(optionalUser.isPresent()){
+            User user = optionalUser.get();
+            return user.getTrips();
+        }else
+            return null;
+    }
 }

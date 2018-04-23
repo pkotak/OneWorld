@@ -42,7 +42,6 @@ public class ReviewService {
         Optional<Review> optionalReview = reviewRepository.findById(id);
         if (optionalReview.isPresent()) {
             Review review = optionalReview.get();
-//            review.set(newreview);
             return reviewRepository.save(review);
         } else
             return null;
