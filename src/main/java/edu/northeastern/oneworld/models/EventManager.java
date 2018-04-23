@@ -23,7 +23,7 @@ public class EventManager extends Person implements Serializable{
         super(firstName, lastName, phoneNumber, address, email, username, password, dob);
         this.trips = trips;
     }
-
+//    @OneToMany(mappedBy = "eventManager")
     public List<Trip> getTrips() {
         return trips;
     }

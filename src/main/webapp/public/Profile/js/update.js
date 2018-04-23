@@ -1,6 +1,6 @@
 function update(index){
     var buttonId = "#updateButton" + index;
-    var url = 'http://localhost:8080/api/destination/' + (index+1);
+    var url = 'http://localhost:8080/api/destination/' + (index);
 
     if($.cookie("name") === undefined){
         window.location.href = "../login.html";

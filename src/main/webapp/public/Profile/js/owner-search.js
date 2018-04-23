@@ -4,61 +4,79 @@ $(document).ready(function() {
     });
 });
 
-function getMyDestinations() {
+function getMyDestinations(name) {
+    console.log(name);
+
+    console.log("In get my dest");
+    var id = getUserId(name);
+    var url = 'http://localhost:8080/api/owner';
+
     $.ajax({
-        url:'http://localhost:8080/api/destination                                                 ',
-        type:'get',
-        success:function(response){
-            var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>City</th><th>Country</th><th>Website</th><th></th></tr></thead><tbody>';
+        url: url,
+        type: 'get',
+        data: {username: username},
+        success: function (response) {
+            console.log(response);
+            owner = response[0];
 
-            for(var i = 0; i < response.length; i++){
-                table_body+='<tr>';
+            url = 'http://localhost:8080/api/owner/' + owner.id;
+            $.ajax({
+                url: url,
+                type: 'get',
+                success: function (response) {
 
+                    var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>City</th><th>Country</th><th>Website</th><th></th></tr></thead><tbody>';
 
-                table_body +='<td>';
-                table_body +=i+1;
-                table_body +='</td>';
-                table_body +='<td>';
-                table_body +=response[i].name;
-
-                table_body +='</td>';
-
-                table_body +='<td>';
-                table_body +=response[i].city;
-                table_body +='</td>';
-
-                table_body +='<td>';
-                table_body +=response[i].country;
-                table_body +='</td>';
-
-                table_body +='<td>';
-                table_body +=response[i].websiteLink;
-                table_body +='</td>';
+                    for (var i = 0; i < response.length; i++) {
+                        table_body += '<tr>';
 
 
+                        table_body += '<td>';
+                        table_body += i + 1;
+                        table_body += '</td>';
+                        table_body += '<td>';
+                        table_body += response[i].name;
 
-                table_body +='<td>';
+                        table_body += '</td>';
 
-                var buttonId = "updateButton" + i;
+                        table_body += '<td>';
+                        table_body += response[i].city;
+                        table_body += '</td>';
 
-                table_body += "<div class='container'><button class='btn .btnView' id="+buttonId+" onclick='update("+i+");' data-toggle='modal' data-target='#product_view'><b>View</b></button></div>";
-                table_body +='</td>';
-                table_body+='</tr>';
-            }
-            table_body+='</tbody></table>';
-            $("#tableDiv").html(table_body);
+                        table_body += '<td>';
+                        table_body += response[i].country;
+                        table_body += '</td>';
+
+                        table_body += '<td>';
+                        table_body += response[i].websiteLink;
+                        table_body += '</td>';
+
+
+                        table_body += '<td>';
+
+                        var buttonId = "updateButton" + i;
+
+                        table_body += "<div class='container'><button class='btn .btnView' id=" + buttonId + " onclick='update(" + i + ");' data-toggle='modal' data-target='#product_view'><b>View</b></button></div>";
+                        table_body += '</td>';
+                        table_body += '</tr>';
+                    }
+                    table_body += '</tbody></table>';
+                    $("#tableDiv").html(table_body);
+                }
+            });
         }
     });
 
     // for search function.................................. only............................
-    $("#search").on("keyup", function() {
+    $("#search").on("keyup", function () {
         var value = $(this).val().toLowerCase();
-        $("table tr").filter(function(index) {
-            if(index>0){
+        $("table tr").filter(function (index) {
+            if (index > 0) {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             }
         });
     });
+
 }
 
 
@@ -132,7 +150,7 @@ function displayDataCard1() {
 function getAllTripRequests() {
 
     $.ajax({
-        url:'http://localhost:8080/api/owner',
+        url:'http://localhost:8080/api/trip',
         type:'get',
         success:function(response){
             console.log(response[0].firstName);
