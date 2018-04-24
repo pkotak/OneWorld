@@ -114,7 +114,8 @@ function getAllUserTrips(userId) {
 function populateTrips(response){
     var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>City</th><th>Country</th><th>Type</th><th></th></tr></thead><tbody>';
     for(var i = 0; i < response.length; i++){
-        (function(i){
+        (function(i)
+        {
             $.ajax({
                 url : 'http://localhost:8080/api/trip/'+response[i].id+'/destination',
                 type : 'get',
@@ -149,14 +150,20 @@ function populateTrips(response){
                     table_body += "<div class='container'><button class='btn .btnView' id="+buttonId+" onclick='updateUser("+i+");' data-toggle='modal' data-target='#product_view'><b>View</b></button></div>";
                     table_body +='</td>';
                     table_body+='</tr>';
-                    table_body+='</tbody></table>';
-                    $("#tableDiv").html(table_body);
+                    // table_body+='</tbody></table>';
+                    // $("#tableDiv").html(table_body);
+                    callback.call();
                 }
+
+
+
             });
+
+
         })(i);
     }
-    // table_body+='</tbody></table>';// This is table ends
-    // $("#tableDiv").html(table_body);
+    table_body+='</tbody></table>';// This is table ends
+    $("#tableDiv").html(table_body);
 }
 
 function getDestination(tripId) {
