@@ -33,28 +33,22 @@ $(document).ready(function() {
                         $.cookie("type", response);
 
                         window.location.href = "../public/Profile/admin-profile.html";
-                        console.log('success 1');
                     } else if(response == 2){
                         console.log(response);
                         $.cookie("name", username);
                         $.cookie("type", response);
 
                         window.location.href = "../public/Profile/user-profile.html";
-                        console.log('success 2');
                     }else if(response == 3){
-                        console.log(response);
                         $.cookie("name", username);
                         $.cookie("type", response);
 
                         window.location.href = "../public/Profile/owner-profile.html";
-                        console.log('success 3');
                     }else if(response == 4){
-                        console.log(response);
                         $.cookie("name", username);
                         $.cookie("type", response);
 
-                        window.location.href = "../public/Profile/eventmanager-profile.html";
-                        console.log('success 4');
+                        window.location.href = "../public/Profile/eventmanager-profile.html";;
                     } else{
                         msg = "Invalid username and password!";
                         console.log(msg);

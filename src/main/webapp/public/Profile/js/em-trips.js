@@ -1,13 +1,19 @@
-function addToTrips(arg) {
-    console.log(arg);
-
+function addToTrips(manager) {
     $.ajax({
-        url:'http://localhost:8080/api/user',
-        type:'get',
-        data:{username : 'jd'},
-        success:function(eventManager){
-            eventManager = eventManager[0];
-            var obj = {eventManager: {id : eventManager.id}, destination : {id : arg.destinationId}};
+        url: 'http://localhost:8080/api/user',
+        type: 'get',
+        data : {username : manager.managerName},
+        success : function (eventmanager) {
+            // getAllTrips(user[0].id);
+            createTrip(eventmanager,manager.destinationId);
+        }
+    });
+}
+
+
+function createTrip(emanager, destId) {
+            var eventManager = emanager[0];
+            var obj = {eventManager: {id : eventManager.id}, destination : {id : destId}};
             console.log(obj);
             $.ajax({
                 url: 'http://localhost:8080/api/trip',
@@ -15,11 +21,9 @@ function addToTrips(arg) {
                 contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(obj),
                 success: function (response) {
-                    console.log(response);
+                    console.log('Success'+response);
                 }
             });
-        }
-    });
 }
 
 

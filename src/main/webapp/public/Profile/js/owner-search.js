@@ -4,28 +4,23 @@ $(document).ready(function() {
     });
 });
 
-function getMyDestinations(name) {
-    console.log(name);
-
-    console.log("In get my dest");
-    var id = getUserId(name);
+function getMyDestinations() {
     var url = 'http://localhost:8080/api/owner';
-
     $.ajax({
         url: url,
         type: 'get',
-        data: {username: username},
+        data: {username: $.cookie("name")},
         success: function (response) {
             console.log(response);
-            owner = response[0];
+            var owner = response[0];
 
-            url = 'http://localhost:8080/api/owner/' + owner.id;
+            url = 'http://localhost:8080/api/owner/'+owner.id+'/destination';
             $.ajax({
                 url: url,
                 type: 'get',
                 success: function (response) {
 
-                    var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>City</th><th>Country</th><th>Website</th><th></th></tr></thead><tbody>';
+                    var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>City</th><th>Country</th><th>Type</th><th></th></tr></thead><tbody>';
 
                     for (var i = 0; i < response.length; i++) {
                         table_body += '<tr>';
@@ -48,7 +43,7 @@ function getMyDestinations(name) {
                         table_body += '</td>';
 
                         table_body += '<td>';
-                        table_body += response[i].websiteLink;
+                        table_body += response[i].destinationType;
                         table_body += '</td>';
 
 
@@ -144,8 +139,6 @@ function displayDataCard1() {
         });
     });
 }
-
-
 
 function getAllTripRequests() {
 
