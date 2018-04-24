@@ -63,3 +63,9 @@ $(document).ready(function() {
 
     });
 });
+
+function logout() {
+    $.cookie('name', '');
+    $.cookie('type', '');
+    window.location.href = "../login.html";
+}

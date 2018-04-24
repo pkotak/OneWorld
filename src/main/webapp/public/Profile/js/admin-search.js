@@ -332,7 +332,7 @@ function getAllReviews1(place) {
     var response = place.reviews;
     // console.log(response);
     var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>Text</th><th>Rating</th><th>Time</th><th></th></tr></thead><tbody>';
-    for (var i = 0 ; i < place.reviews.length ; i ++){
+    c
         table_body+='<tr>';
 
         table_body +='<td>';
