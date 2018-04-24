@@ -36,7 +36,7 @@ public class Review {
 
 
     public Review(int id, User user, int rating, String description, String dateOfReview, List<UserLike> numberOfLikes,
-                  Destination destination, DestinationType placeType) {
+                  Destination destination) {
         super();
         this.id = id;
         this.user = user;

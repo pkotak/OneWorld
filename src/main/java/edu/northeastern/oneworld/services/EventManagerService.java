@@ -3,8 +3,10 @@ package edu.northeastern.oneworld.services;
 import com.google.gson.Gson;
 import edu.northeastern.oneworld.models.EventManager;
 import edu.northeastern.oneworld.models.Trip;
+import edu.northeastern.oneworld.models.User;
 import edu.northeastern.oneworld.repositories.EventManagerRepository;
 import edu.northeastern.oneworld.repositories.TripRepository;
+import edu.northeastern.oneworld.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +21,9 @@ public class EventManagerService {
 
     @Autowired
     TripRepository tripRepository;
+
+    @Autowired
+    UserRepository userRepository;
 
     /**
      * Method to create a new event manager
@@ -100,5 +105,23 @@ public class EventManagerService {
     @DeleteMapping("/api/eventmanager/{eId}")
     public void deleteEventManager(@PathVariable("eId") int id) {
         eventManagerRepository.deleteById(id);
+    }
+
+    /**
+     * Add a User to a trip
+     * @param eid Event Manager id
+     * @param uId User id
+     */
+    @PostMapping("/api/eventmanager/{eid}/user/{uid}")
+    public void addUserToFollowers(@PathVariable("eid") int eid,
+                              @PathVariable("uid") int uId){
+        Optional<EventManager> optionalEventManager = eventManagerRepository.findById(eid);
+        Optional<User> optionalUser = userRepository.findById(uId);
+        if (optionalEventManager.isPresent() && optionalUser.isPresent()){
+            EventManager eventManager = optionalEventManager.get();
+            User u = optionalUser.get();
+            eventManager.addUserToFollowers(u);
+            eventManagerRepository.save(eventManager);
+        }
     }
 }

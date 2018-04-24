@@ -51,7 +51,7 @@ public class UserService {
             int type = 0;
             switch (userRepository.getUserType(username)){
                 case "Admin":
-                    type = 3;
+                    type = 1;
                     break;
                 case "User":
                     type = 2;
@@ -65,7 +65,6 @@ public class UserService {
                 default:
                     type = 0;
             }
-        System.out.println("Type is "+ type);
             return type;
     }
     /**
@@ -73,8 +72,11 @@ public class UserService {
      * @return
      */
     @GetMapping("/api/user")
-    public Iterable<User> findAllUsers(){
-        return userRepository.getUsers();
+    public Iterable<User> findAllUsers(@RequestParam(value = "username",required = false) String username){
+        if(username != "")
+            return userRepository.getUserByUsername(username);
+        else
+            return userRepository.getUsers();
     }
 
     /**
@@ -87,7 +89,6 @@ public class UserService {
     public Optional<User> findUserById(@PathVariable("userId") int id) {
         return userRepository.findById(id);
     }
-
 
     /**
      * Find a specific user's reviews

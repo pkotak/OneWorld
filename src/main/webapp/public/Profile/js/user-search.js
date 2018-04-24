@@ -9,7 +9,7 @@ function getAllDestinations() {
         url:'http://localhost:8080/api/destination                                                 ',
         type:'get',
         success:function(response){
-            var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>City</th><th>Country</th><th>Website</th><th></th></tr></thead><tbody>';
+            var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>City</th><th>Country</th><th>Type</th><th></th></tr></thead><tbody>';
 
             for(var i = 0; i < response.length; i++){
                 table_body+='<tr>';
@@ -32,7 +32,7 @@ function getAllDestinations() {
                 table_body +='</td>';
 
                 table_body +='<td>';
-                table_body +=response[i].websiteLink;
+                table_body +=response[i].destinationType;
                 table_body +='</td>';
 
 
@@ -60,7 +60,91 @@ function getAllDestinations() {
         });
     });
 }
+function getUserObject(username) {
+    $.ajax({
+        url: 'http://localhost:8080/api/user',
+        type: 'get',
+        data : {username : username},
+        success : function (user) {
+            getAllTrips(user[0].id);
+        }
+    });
+}
+function getAllTrips(userId) {
+        $.ajax({
+            url: 'http://localhost:8080/api/user/'+userId+'/trip',
+            type: 'get',
+            success: function (response) {
+                getDestination(response[0].id);
+            }
+        });
 
+        // for search function.................................. only............................
+        $("#search").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("table tr").filter(function(index) {
+                if(index>0){
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                }
+            });
+        });
+}
+
+function getDestination(tripId) {
+    $.ajax({
+        url: 'http://localhost:8080/api/trip/'+tripId+'/destination',
+        type: 'get',
+        success: function (response) {
+            var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>City</th><th>Country</th><th>Type</th><th></th></tr></thead><tbody>';
+
+            for (var i = 0; i < 1; i++) {
+                table_body += '<tr>';
+
+
+                table_body += '<td>';
+                table_body += i + 1;
+                table_body += '</td>';
+                table_body += '<td>';
+                table_body += response.name;
+
+                table_body += '</td>';
+
+                table_body += '<td>';
+                table_body += response.city;
+                table_body += '</td>';
+
+                table_body += '<td>';
+                table_body += response.country;
+                table_body += '</td>';
+
+                table_body += '<td>';
+                table_body += response.destinationType;
+                table_body += '</td>';
+
+
+                table_body += '<td>';
+
+                var buttonId = "updateButton" + i;
+
+                table_body += "<div class='container'><button class='btn .btnView' id=" + buttonId + " onclick='update(" + i + ");' data-toggle='modal' data-target='#product_view'><b>View</b></button></div>";
+                table_body += '</td>';
+                table_body += '</tr>';
+            }
+            table_body += '</tbody></table>';
+            $("#tableDiv").html(table_body);
+        }
+    });
+
+    // for search function.................................. only............................
+    $("#search").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("table tr").filter(function(index) {
+            if(index>0){
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            }
+        });
+    });
+}
 
 function getAllUsers() {
 

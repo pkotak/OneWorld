@@ -12,7 +12,9 @@
     <!--<script src="js/update.js"></script>-->
     <script src="js/reviews.js"></script>
     <script src="js/likes.js"></script>
-    <script src="js/trips.js"></script>
+    <!--<script src="js/trips.js"></script>-->
+    <script src="js/em-trips.js"></script>
+
 
     <link href="css/user-profile.css" rel="stylesheet">
     <script src="js/jquery.cookie.js"></script>
@@ -143,7 +145,7 @@
                                     </div>
                                     <div class="back">
                                         <div class="container">
-                                            <button class="btn" id="dataButton2" onclick="getMyTrips($.cookie('name', { 'type': 'EventManager'}))"><b>Get My Trips</b></button>
+                                            <button class="btn" id="dataButton2" onclick="MyTrips.getMyTrips(4)"><b>Get My Trips</b></button>
                                         </div>
                                     </div>
                                 </div>
@@ -151,7 +153,7 @@
                             </div>
                         </div>
                     </div>
-                    \
+
 
                     <div class="col-xs-12 col-sm-12">
                         <div class="panel panel-default">

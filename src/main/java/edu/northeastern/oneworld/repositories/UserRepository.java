@@ -1,11 +1,12 @@
 package edu.northeastern.oneworld.repositories;
 
-import edu.northeastern.oneworld.models.Owner;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
 import edu.northeastern.oneworld.models.User;
+
+import java.util.Optional;
 
 
 public interface UserRepository extends CrudRepository<User, Integer>{
@@ -34,6 +35,14 @@ public interface UserRepository extends CrudRepository<User, Integer>{
 	 */
 	@Query("SELECT p.class FROM Person p WHERE p.username=:username")
 	String getUserType(@Param("username") String username);
+
+	/**
+	 * Method to find user by username
+	 * @param username
+	 * @return Person
+	 */
+	@Query("SELECT p FROM Person p WHERE p.username=:username")
+	Iterable<User> getUserByUsername(@Param("username") String username);
 
 	/**
 	 * Method to find all users

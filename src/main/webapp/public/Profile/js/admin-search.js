@@ -10,7 +10,7 @@ function displayDataCard2() {
         url:'http://localhost:8080/api/destination                                                 ',
         type:'get',
         success:function(response){
-            var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>City</th><th>Country</th><th>Website</th><th></th></tr></thead><tbody>';
+            var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>City</th><th>Country</th><th>Type</th><th></th></tr></thead><tbody>';
 
             for(var i = 0; i < response.length; i++){
                 table_body+='<tr>';
@@ -34,7 +34,7 @@ function displayDataCard2() {
                 table_body +='</td>';
 
                 table_body +='<td>';
-                table_body +=response[i].websiteLink;
+                table_body +=response[i].destinationType;
                 table_body +='</td>';
 
 

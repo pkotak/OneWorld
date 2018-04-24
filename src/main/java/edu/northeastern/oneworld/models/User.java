@@ -22,13 +22,17 @@ public class User extends Person implements Serializable {
 	@JoinTable(name = "UsersInTrips")
 	@JsonIgnore
 	private List<Trip> trips;
+	@ManyToMany(mappedBy = "followers",cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<EventManager> eventManagers;
 	private static final long serialVersionUID = 1L;
 
-	public User(List<UserLike> likes, List<Review> reviews, List<Trip> trips) {
-		super();
+	public User(String firstName, String lastName, String phoneNumber, String address, String email, String username, String password, String dob, List<UserLike> likes, List<Review> reviews, List<Trip> trips, List<EventManager> eventManagers) {
+		super(firstName, lastName, phoneNumber, address, email, username, password, dob);
 		this.likes = likes;
 		this.reviews = reviews;
 		this.trips = trips;
+		this.eventManagers = eventManagers;
 	}
 
 	public User() {
@@ -65,6 +69,14 @@ public class User extends Person implements Serializable {
 			trip.getUser().add(this);
 	}
 
+	public List<EventManager> getEventManagers() {
+		return eventManagers;
+	}
+
+	public void setEventManagers(List<EventManager> eventManagers) {
+		this.eventManagers = eventManagers;
+	}
+
 	public void set(User newUser) {
 		this.setUsername(newUser.getUsername() != null ? newUser.getUsername() : this.getUsername());
 		this.setPassword(newUser.getPassword() != null ? newUser.getPassword() : this.getPassword());
@@ -76,12 +88,17 @@ public class User extends Person implements Serializable {
 		this.setPhoneNumber(newUser.getPhoneNumber() != null ? newUser.getPhoneNumber() : this.getPhoneNumber());
 		this.setTrips(newUser.getTrips() != null ? newUser.getTrips() : this.getTrips());
 		this.setLikes(newUser.getLikes() != null ? newUser.getLikes() : this.getLikes());
+		this.setEventManagers(newUser.getEventManagers() != null ? newUser.getEventManagers() : this.getEventManagers());
 	}
 
 	@Override
 	public String toString() {
-		return "User [likes=" + likes + ", reviews=" + reviews + ", trips=" + trips
-				+ "]";
+		return "User{" +
+				"likes=" + likes +
+				", reviews=" + reviews +
+				", trips=" + trips +
+				", eventManagers=" + eventManagers +
+				'}';
 	}
 
 }
