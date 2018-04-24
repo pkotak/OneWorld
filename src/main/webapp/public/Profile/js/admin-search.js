@@ -130,6 +130,7 @@ function displayDataCard1() {
         url:'http://localhost:8080/api/user                                                 ',
         type:'get',
         success:function(response){
+            console.log(response);
             console.log(response[0].firstName);
             console.log(response[0]);
 
@@ -332,7 +333,6 @@ function getAllReviews1(place) {
     var response = place.reviews;
     // console.log(response);
     var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>Text</th><th>Rating</th><th>Time</th><th></th></tr></thead><tbody>';
-    c
         table_body+='<tr>';
 
         table_body +='<td>';
@@ -370,8 +370,6 @@ function getAllReviews1(place) {
         table_body+='</tr>';
         var review = place.reviews[i];
         // console.log(review);
-
-    }
     table_body+='</tbody></table>';
     $("#tableDiv").html(table_body);
 }

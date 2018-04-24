@@ -73,7 +73,7 @@ public class UserService {
      */
     @GetMapping("/api/user")
     public Iterable<User> findAllUsers(@RequestParam(value = "username",required = false) String username){
-        if(username != "")
+        if(username != "" && username != null)
             return userRepository.getUserByUsername(username);
         else
             return userRepository.getUsers();

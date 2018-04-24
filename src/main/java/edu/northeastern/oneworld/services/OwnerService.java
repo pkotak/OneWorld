@@ -36,7 +36,7 @@ public class OwnerService {
 	 */
 	@GetMapping("/api/owner")
 	public Iterable<Owner> findAllOwners(@RequestParam(value = "username", required = false) String username){
-		if(username != "")
+		if(username != "" && username != null)
 			return ownerRepository.findUserByUsername(username);
 		else
 			return ownerRepository.getOwners();
