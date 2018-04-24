@@ -9,8 +9,6 @@ function update(index){
             url:url,
             type:'get',
             success:function(response) {
-                console.log(response);
-
                 var service = new google.maps.places.PlacesService(document.createElement('div'));
 
                 var request = {
@@ -19,9 +17,7 @@ function update(index){
 
                 var img_url;
                 service.getDetails(request, function(place, status) {
-                    console.log(status);
                     if (status == google.maps.places.PlacesServiceStatus.OK) {
-                        console.log(place);
                         if (place.reviews != undefined)
                             $("#card-num-reviews").text(place.reviews.length + " Reviews");
 
@@ -31,13 +27,11 @@ function update(index){
                     }
                 });
 
-                console.log("This is the image: " + img_url)
                 var toSend = {
                     "managerName": $.cookie("name"),
                     "destinationId": (index+1)
                 }
                 var reviewFunction = "addToTrips("+ JSON.stringify(toSend) + ");";
-                console.log(reviewFunction);
                 // var reviewFunction = "addToTrips("+ JSON.stringify(toSend) + ");";
                 $("#addToTrips").attr("onclick", reviewFunction);
 

@@ -130,10 +130,6 @@ function displayDataCard1() {
         url:'http://localhost:8080/api/user                                                 ',
         type:'get',
         success:function(response){
-            console.log(response);
-            console.log(response[0].firstName);
-            console.log(response[0]);
-
             var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>Phone Number</th><th>Address</th><th>Date Of Birth</th><th>Username</th><th></th><th></th></tr></thead><tbody>';
 
             for(var i = 0; i < response.length; i++){
@@ -204,8 +200,6 @@ function displayDataCard3() {
         url:'http://localhost:8080/api/owner                                                 ',
         type:'get',
         success:function(response){
-            console.log(response[0].firstName);
-            console.log(response[0]);
 
             var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>Phone Number</th><th>Address</th><th>Date Of Birth</th><th>Username</th><th></th></tr></thead><tbody>';
 
@@ -268,8 +262,6 @@ function displayDataCard4() {
         url:'http://localhost:8080/api/eventmanager                                                 ',
         type:'get',
         success:function(response){
-            console.log(response[0].firstName);
-            console.log(response[0]);
 
             var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>Phone Number</th><th>Address</th><th>Date Of Birth</th><th>Username</th><th></th></tr></thead><tbody>';
 
@@ -369,7 +361,6 @@ function getAllReviews1(place) {
         table_body +='</td>';
         table_body+='</tr>';
         var review = place.reviews[i];
-        // console.log(review);
     table_body+='</tbody></table>';
     $("#tableDiv").html(table_body);
 }

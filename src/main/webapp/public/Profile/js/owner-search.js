@@ -11,7 +11,6 @@ function getMyDestinations() {
         type: 'get',
         data: {username: $.cookie("name")},
         success: function (response) {
-            console.log(response);
             var owner = response[0];
 
             url = 'http://localhost:8080/api/owner/'+owner.id+'/destination';
@@ -19,7 +18,6 @@ function getMyDestinations() {
                 url: url,
                 type: 'get',
                 success: function (response) {
-
                     var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>City</th><th>Country</th><th>Type</th><th></th></tr></thead><tbody>';
 
                     for (var i = 0; i < response.length; i++) {
@@ -81,9 +79,6 @@ function displayDataCard1() {
         url:'http://localhost:8080/api/user                                                 ',
         type:'get',
         success:function(response){
-            console.log(response[0].firstName);
-            console.log(response[0]);
-
             var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>Phone Number</th><th>Address</th><th>Date Of Birth</th><th>Username</th><th></th></tr></thead><tbody>';
 
             for(var i = 0; i < response.length; i++){
@@ -146,9 +141,6 @@ function getAllTripRequests() {
         url:'http://localhost:8080/api/trip',
         type:'get',
         success:function(response){
-            console.log(response[0].firstName);
-            console.log(response[0]);
-
             var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>Phone Number</th><th>Address</th><th>Date Of Birth</th><th>Username</th><th></th></tr></thead><tbody>';
 
             for(var i = 0; i < response.length; i++){

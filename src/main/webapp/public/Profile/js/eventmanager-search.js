@@ -66,7 +66,6 @@ function getMyTrips2() {
 
 
 function getAllDestinations() {
-    console.log("Reached Destnations");
     $.ajax({
         url:'http://localhost:8080/api/destination                                                 ',
         type:'get',
@@ -129,8 +128,6 @@ function displayDataCard1() {
         url:'http://localhost:8080/api/user                                                 ',
         type:'get',
         success:function(response){
-            console.log(response[0].firstName);
-            console.log(response[0]);
 
             var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>Phone Number</th><th>Address</th><th>Date Of Birth</th><th>Username</th><th></th></tr></thead><tbody>';
 
@@ -198,8 +195,6 @@ function getAllOwners() {
         url:'http://localhost:8080/api/owner',
         type:'get',
         success:function(response){
-            console.log(response[0].firstName);
-            console.log(response[0]);
 
             var table_body = '<table border="1" id="example" class = "table table-hover"><thead><tr><th>Sr No</th><th>Name</th><th>Phone Number</th><th>Address</th><th>Date Of Birth</th><th>Username</th><th></th></tr></thead><tbody>';
 

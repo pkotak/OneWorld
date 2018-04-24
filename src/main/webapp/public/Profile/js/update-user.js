@@ -46,7 +46,6 @@ $(document).ready(function(){
                 contentType: "application/json; charset=utf-8",
                 data:JSON.stringify(jsonObj),
                 success:function(response){
-                console.log('success');
                 }
             });
     });

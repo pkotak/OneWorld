@@ -57,9 +57,6 @@ $(document).ready(function() {
                 }
             });
         }
-        else{
-            console.log("Error elese")
-        }
 
     });
 });

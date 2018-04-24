@@ -9,7 +9,6 @@ function update(index){
             url:url,
             type:'get',
             success:function(response) {
-                console.log(response);
 
                 var service = new google.maps.places.PlacesService(document.createElement('div'));
 
@@ -32,7 +31,6 @@ function update(index){
                     }
                 });
 
-                console.log("This is the image: " + img_url)
                 $(".modal-title").text(response.name);
                 $("#card-name").text(response.name);
                 $("#card-rating").text("Ratings: " + response.rating);
