@@ -27,6 +27,7 @@ public class EventManagerService {
 
     /**
      * Method to create a new event manager
+     *
      * @param json event manager object
      * @return event manager
      */
@@ -39,6 +40,7 @@ public class EventManagerService {
 
     /**
      * Method to find an event manager
+     *
      * @param id event manager id
      * @return event manager
      */
@@ -48,19 +50,20 @@ public class EventManagerService {
     }
 
     @GetMapping("/api/eventmanager")
-    public Iterable<EventManager> getEventManagers(){
+    public Iterable<EventManager> getEventManagers() {
         return eventManagerRepository.getEventManagers();
     }
 
     /**
      * Method to find an event manager for a trip
+     *
      * @param id trip id
      * @return event manager
      */
     @GetMapping("/api/trip/{tid}/eventmanager")
     public EventManager findUserById(@PathVariable("tid") int id) {
         Optional<Trip> optionalTrip = tripRepository.findById(id);
-        if(optionalTrip.isPresent()){
+        if (optionalTrip.isPresent()) {
             Trip trip = optionalTrip.get();
             return trip.getEventManager();
         }
@@ -69,13 +72,14 @@ public class EventManagerService {
 
     /**
      * Method to find an event manager for a trip
+     *
      * @param id trip id
      * @return event manager
      */
     @GetMapping("/api/eventmanager/{eid}/trip")
     public Iterable<Trip> findTripsForEventManager(@PathVariable("eid") int id) {
         Optional<EventManager> optionalEventManager = eventManagerRepository.findById(id);
-        if(optionalEventManager.isPresent()){
+        if (optionalEventManager.isPresent()) {
             EventManager eventManager = optionalEventManager.get();
             return eventManager.getTrips();
         }
@@ -84,6 +88,7 @@ public class EventManagerService {
 
     /**
      * Method to update an event manager for a trip
+     *
      * @param id trip id
      * @return event manager
      */
@@ -100,6 +105,7 @@ public class EventManagerService {
 
     /**
      * Method to delete an event manager for a trip
+     *
      * @param id event manager id
      */
     @DeleteMapping("/api/eventmanager/{eId}")
@@ -109,19 +115,35 @@ public class EventManagerService {
 
     /**
      * Add a User to a trip
+     *
      * @param eid Event Manager id
      * @param uId User id
      */
     @PostMapping("/api/eventmanager/{eid}/user/{uid}")
     public void addUserToFollowers(@PathVariable("eid") int eid,
-                              @PathVariable("uid") int uId){
+                                   @PathVariable("uid") int uId) {
         Optional<EventManager> optionalEventManager = eventManagerRepository.findById(eid);
         Optional<User> optionalUser = userRepository.findById(uId);
-        if (optionalEventManager.isPresent() && optionalUser.isPresent()){
+        if (optionalEventManager.isPresent() && optionalUser.isPresent()) {
             EventManager eventManager = optionalEventManager.get();
             User u = optionalUser.get();
             eventManager.addUserToFollowers(u);
             eventManagerRepository.save(eventManager);
         }
+    }
+
+    /**
+     * Add a User to a trip
+     *
+     * @param eid Event Manager id
+     */
+    @GetMapping("/api/eventmanager/{eid}/followers")
+    public Iterable<User> getAllFollowers(@PathVariable("eid") int eid) {
+        Optional<EventManager> optionalEventManager = eventManagerRepository.findById(eid);
+        if (optionalEventManager.isPresent()) {
+            EventManager eventManager = optionalEventManager.get();
+            return eventManager.getFollowers();
+        }else
+            return null;
     }
 }
