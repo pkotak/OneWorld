@@ -4,6 +4,15 @@ $(document).ready(function() {
     });
 });
 
+function followEventManager(){
+    $.ajax({
+       url : 'http://localhost:8080/api/eventmanager/4/user/5',
+       type : 'post',
+        success : function (response) {
+            alert('Following event manager');
+        }
+    });
+}
 function getAllDestinations() {
     $.ajax({
         url:'http://localhost:8080/api/destination                                                 ',
@@ -163,8 +172,6 @@ function populateTrips(response){
 
         })(i);
     }
-    // table_body+='</tbody></table>';// This is table ends
-    // $("#tableDiv").html(table_body);
 }
 
 function getDestination(tripId) {
